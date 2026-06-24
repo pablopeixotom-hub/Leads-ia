@@ -670,6 +670,61 @@
     gap:8px;
   }
 
+  /* Exportar Leads */
+  .export-subtitle{
+    font-size:13px;
+    color:var(--text-muted);
+    margin:2px 0 16px;
+  }
+  .export-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px 24px;
+  }
+  .export-filters{
+    display:flex;
+    align-items:flex-end;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .export-checkboxes{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding-bottom:2px;
+  }
+  .export-check{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12.5px;
+    color:var(--text);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .export-check input{
+    width:15px;height:15px;
+    accent-color:var(--primary-dark);
+    cursor:pointer;
+  }
+  .badge-sim{ background:#D8FFE9; color:var(--green); }
+  .badge-nao{ background:#E5E7EB; color:var(--text-muted); }
+  .extract-btn-green{
+    background:#1C643B;
+    color:#fff;
+    border:none;
+    padding:11px 20px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
   /* Modal */
   .overlay{
     position:fixed;
@@ -1120,7 +1175,7 @@
   <div class="nav">
     <button class="active" id="navDashboard">Dashboard</button>
     <button id="navHistorico">Histórico de Campanhas</button>
-    <button>Exportar Leads</button>
+    <button id="navExportar">Exportar Leads</button>
     <button>Extrato de Créditos</button>
   </div>
   <div class="user">
@@ -1415,6 +1470,64 @@
       <div class="extract-btn-wrap" id="extractBtnWrap" style="display:none;">
         <button class="extract-btn" id="extractBtn"><i class="ph ph-download-simple"></i> Extrair Relação de Mensagens Não Entregues</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORTAR LEADS -->
+<div class="container" id="exportLeadsView" style="display:none;">
+  <div class="section-title"><i class="ph ph-export"></i> Exportar Leads</div>
+  <div class="export-subtitle">Exibindo os últimos leads gerados</div>
+
+  <div class="export-card">
+    <div class="export-filters">
+      <div class="conv-field" style="flex:1;">
+        <label>Buscar pela campanha</label>
+        <div class="conv-input-icon">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" id="exportSearch" placeholder="Busque pela campanha">
+        </div>
+      </div>
+
+      <div class="export-checkboxes">
+        <label class="export-check"><input type="checkbox" id="chkJaExtraidos"> Leads Já Extraídos</label>
+        <label class="export-check"><input type="checkbox" id="chkNuncaExtraidos" checked> Leads Nunca Extraídos</label>
+      </div>
+
+      <div class="conv-field conv-date">
+        <label>De</label>
+        <div class="conv-input-icon">
+          <input type="text" id="exportDateFrom" placeholder="dd/mm/aa">
+          <i class="ph ph-calendar-blank"></i>
+        </div>
+      </div>
+      <div class="conv-field conv-date">
+        <label>Até</label>
+        <div class="conv-input-icon">
+          <input type="text" id="exportDateTo" placeholder="dd/mm/aa">
+          <i class="ph ph-calendar-blank"></i>
+        </div>
+      </div>
+      <button class="conv-search-btn" id="exportSearchBtn">Buscar</button>
+    </div>
+
+    <table class="conv-table">
+      <thead><tr><th>Contato</th><th>Número</th><th>Campanha</th><th>Data Lead Gerado</th><th>Lead Exportado</th></tr></thead>
+      <tbody id="exportLeadsBody"></tbody>
+    </table>
+
+    <div class="conv-note"><i class="ph ph-info"></i> É possível extrair Leads de campanhas em Andamento.</div>
+
+    <div class="conv-pagination">
+      <button class="pg-btn" disabled><i class="ph ph-caret-double-left"></i></button>
+      <button class="pg-btn" disabled><i class="ph ph-caret-left"></i></button>
+      <span class="pg-range" id="exportPgRange">1-10 de 87</span>
+      <button class="pg-btn"><i class="ph ph-caret-right"></i></button>
+      <button class="pg-btn"><i class="ph ph-caret-double-right"></i></button>
+    </div>
+
+    <div class="extract-btn-wrap">
+      <button class="extract-btn-green" id="exportExtractBtn"><i class="ph ph-file-xls"></i> Extrair Relação Excel</button>
     </div>
   </div>
 </div>
@@ -2113,8 +2226,10 @@ function showView(view){
   document.getElementById('dashboardView').style.display = view === 'dashboard' ? '' : 'none';
   document.getElementById('historicoView').style.display = view === 'historico' ? '' : 'none';
   document.getElementById('detalheView').style.display = view === 'detalhe' ? '' : 'none';
+  document.getElementById('exportLeadsView').style.display = view === 'exportar' ? '' : 'none';
   document.getElementById('navDashboard').classList.toggle('active', view === 'dashboard');
   document.getElementById('navHistorico').classList.toggle('active', view === 'historico' || view === 'detalhe');
+  document.getElementById('navExportar').classList.toggle('active', view === 'exportar');
   window.scrollTo(0, 0);
 }
 
@@ -2122,6 +2237,10 @@ document.getElementById('navDashboard').addEventListener('click', () => showView
 document.getElementById('navHistorico').addEventListener('click', () => {
   showView('historico');
   renderHistList();
+});
+document.getElementById('navExportar').addEventListener('click', () => {
+  showView('exportar');
+  renderExportLeads();
 });
 
 // ----- Histórico de Campanhas -----
@@ -2223,6 +2342,81 @@ document.getElementById('extractBtn').addEventListener('click', () => {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Não Entregues');
   XLSX.writeFile(wb, 'mensagens_nao_entregues.xlsx');
+});
+
+// ----- Exportar Leads -----
+const LEADS_DATA = [
+  { contato:'Carlos José Mendes',        numero:'+55 11 98765-4321', campanha:'Campanha_Páscoa_2026',     data:'01/04/2026 às 15:00', exportado:false },
+  { contato:'Paulo Ricardo de Carvalho', numero:'+55 11 98555-5656', campanha:'Campanha_Páscoa_2026',     data:'01/04/2026 às 15:00', exportado:false },
+  { contato:'Juliana Almeida Souza',     numero:'+55 21 99876-5432', campanha:'Campanha_Páscoa_2026',     data:'01/04/2026 às 15:00', exportado:false },
+  { contato:'Ricardo Henrique Lopes',    numero:'+55 31 98765-4320', campanha:'Campanha_Páscoa_2026',     data:'01/04/2026 às 15:00', exportado:false },
+  { contato:'Fernanda Castro Oliveira',  numero:'+55 41 99999-8888', campanha:'Campanha_Páscoa_2026',     data:'01/04/2026 às 15:00', exportado:false },
+  { contato:'Thiago Martins Silva',      numero:'+55 51 98765-1234', campanha:'Campanha_Páscoa_2026',     data:'01/04/2026 às 15:00', exportado:false },
+  { contato:'Renata Alves Pinto',        numero:'+55 61 98123-4567', campanha:'Campanha_Natal_2025',      data:'10/12/2025 às 09:00', exportado:true },
+  { contato:'Bruno Cardoso Teixeira',    numero:'+55 71 99876-1234', campanha:'Campanha_BlackFriday_2025',data:'29/11/2025 às 10:00', exportado:true },
+  { contato:'Camila Rodrigues Pires',    numero:'+55 81 98765-9876', campanha:'Campanha_Verão_2026',      data:'15/01/2026 às 11:00', exportado:true },
+  { contato:'Diego Fernandes Costa',     numero:'+55 91 99123-8765', campanha:'Campanha_Verão_2026',      data:'15/01/2026 às 11:00', exportado:true }
+];
+
+const chkJaExtraidos = document.getElementById('chkJaExtraidos');
+const chkNuncaExtraidos = document.getElementById('chkNuncaExtraidos');
+
+chkJaExtraidos.addEventListener('change', () => {
+  if (chkJaExtraidos.checked) chkNuncaExtraidos.checked = true;
+});
+
+function leadRowHtml(l){
+  return `<tr>
+    <td>${l.contato}</td>
+    <td>${l.numero}</td>
+    <td>${l.campanha}</td>
+    <td>${l.data}</td>
+    <td><span class="badge ${l.exportado ? 'badge-sim' : 'badge-nao'}">${l.exportado ? 'Sim' : 'Não'}</span></td>
+  </tr>`;
+}
+
+function renderExportLeads(){
+  const ja = chkJaExtraidos.checked;
+  const nunca = chkNuncaExtraidos.checked;
+  const search = document.getElementById('exportSearch').value.trim().toLowerCase();
+  const dateFrom = document.getElementById('exportDateFrom').value.trim();
+  const dateTo = document.getElementById('exportDateTo').value.trim();
+
+  let filtered;
+  if (ja && nunca) {
+    filtered = LEADS_DATA;
+  } else if (ja) {
+    filtered = LEADS_DATA.filter(l => l.exportado);
+  } else if (nunca) {
+    filtered = LEADS_DATA.filter(l => !l.exportado);
+  } else {
+    filtered = LEADS_DATA;
+  }
+
+  if (search) {
+    const bySearch = filtered.filter(l => l.campanha.toLowerCase().includes(search) || l.contato.toLowerCase().includes(search));
+    if (bySearch.length) filtered = bySearch;
+  }
+
+  if (!filtered.length) filtered = LEADS_DATA;
+
+  document.getElementById('exportLeadsBody').innerHTML = filtered.map(leadRowHtml).join('');
+  document.getElementById('exportPgRange').textContent = `1-${filtered.length} de 87`;
+}
+
+document.getElementById('exportSearchBtn').addEventListener('click', renderExportLeads);
+chkJaExtraidos.addEventListener('change', renderExportLeads);
+chkNuncaExtraidos.addEventListener('change', renderExportLeads);
+
+document.getElementById('exportExtractBtn').addEventListener('click', () => {
+  const ja = chkJaExtraidos.checked;
+  const nunca = chkNuncaExtraidos.checked;
+  let dataset = (ja && nunca) || (!ja && !nunca) ? LEADS_DATA : (ja ? LEADS_DATA.filter(l => l.exportado) : LEADS_DATA.filter(l => !l.exportado));
+  const data = dataset.map(l => ({ Contato:l.contato, Número:l.numero, Campanha:l.campanha, 'Data Lead Gerado':l.data, 'Lead Exportado':l.exportado ? 'Sim' : 'Não' }));
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Leads');
+  XLSX.writeFile(wb, 'leads_exportados.xlsx');
 });
 </script>
 </body>
