@@ -254,43 +254,45 @@
   .overlay.show{display:flex;}
   .modal{
     background:#fff;
-    border-radius:14px;
-    width:560px;
-    max-width:92vw;
-    padding:26px 28px;
+    border-radius:16px;
+    width:760px;
+    max-width:94vw;
+    padding:36px 40px;
     box-shadow:0 20px 60px rgba(0,0,0,0.25);
   }
   .modal h2{
-    margin:0 0 4px;
-    font-size:19px;
+    margin:0 0 6px;
+    font-size:22px;
   }
   .modal .breadcrumb{
-    font-size:12px;
+    font-size:13px;
     color:var(--text-muted);
-    margin-bottom:16px;
+    margin-bottom:24px;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--border);
   }
   .field-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-bottom:6px;
+    gap:22px;
+    margin-bottom:10px;
   }
   .field{
-    margin-bottom:14px;
+    margin-bottom:20px;
   }
   .field label{
     display:block;
-    font-size:12px;
+    font-size:13px;
     font-weight:600;
-    margin-bottom:6px;
+    margin-bottom:8px;
   }
   .field label .req{color:var(--red);}
   select, .fake-select, .upload-zone{
     width:100%;
-    padding:10px 12px;
+    padding:13px 14px;
     border:1px solid var(--border);
     border-radius:8px;
-    font-size:13px;
+    font-size:14px;
     background:#fff;
     color:var(--text);
   }
@@ -343,27 +345,36 @@
     border:1px solid var(--warn-border);
     color:var(--warn-text);
     border-radius:10px;
-    padding:12px 14px;
-    font-size:12.5px;
+    padding:16px 18px;
+    font-size:13px;
+    line-height:1.5;
     display:flex;
-    gap:10px;
+    gap:12px;
     align-items:flex-start;
-    margin-bottom:16px;
+    margin-bottom:22px;
   }
-  .info-box .ic{font-size:16px;}
+  .info-box .ic{
+    width:22px;height:22px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:var(--orange);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;
+  }
   .info-box code{
     background:rgba(255,255,255,0.6);
-    padding:1px 5px;
+    padding:1px 6px;
     border-radius:4px;
   }
   .upload-zone{
     border:1.5px dashed var(--border);
     text-align:center;
-    padding:18px;
-    font-size:12.5px;
+    padding:24px;
+    font-size:13px;
     color:var(--text-muted);
     cursor:pointer;
-    margin-bottom:16px;
+    margin-bottom:22px;
   }
   .upload-zone.has-file{
     border-color:var(--primary);
@@ -379,16 +390,16 @@
   }
   .actions{
     display:flex;
-    gap:12px;
-    margin-top:4px;
+    gap:16px;
+    margin-top:10px;
   }
   .btn-cancel{
     flex:1;
     background:#fff;
     border:1px solid var(--border);
-    padding:11px;
+    padding:14px;
     border-radius:8px;
-    font-size:13px;
+    font-size:14px;
     cursor:pointer;
   }
   .btn-confirm{
@@ -396,9 +407,9 @@
     background:var(--primary-dark);
     color:#fff;
     border:none;
-    padding:11px;
+    padding:14px;
     border-radius:8px;
-    font-size:13px;
+    font-size:14px;
     font-weight:600;
     cursor:pointer;
   }
@@ -408,12 +419,12 @@
   }
 
   .skeleton{
-    height:64px;
+    height:80px;
     border-radius:8px;
     background:linear-gradient(90deg, #eef2f3 25%, #e2e8e9 37%, #eef2f3 63%);
     background-size:400% 100%;
     animation:shimmer 1.4s infinite;
-    margin-bottom:16px;
+    margin-bottom:22px;
   }
   @keyframes shimmer{
     0%{background-position:100% 0;}
@@ -422,16 +433,16 @@
   .progress-label{
     display:flex;
     justify-content:space-between;
-    font-size:12.5px;
+    font-size:14px;
     font-weight:600;
-    margin-bottom:6px;
+    margin-bottom:10px;
   }
   .progress-track{
     height:8px;
     background:var(--border);
     border-radius:6px;
     overflow:hidden;
-    margin-bottom:16px;
+    margin-bottom:22px;
   }
   .progress-fill{
     height:100%;
@@ -442,54 +453,66 @@
   .stats-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin-bottom:16px;
+    gap:16px;
+    margin-bottom:22px;
   }
   .stat{
     text-align:center;
     border:1px solid var(--border);
-    border-radius:10px;
-    padding:10px 4px;
+    border-radius:12px;
+    padding:20px 8px;
   }
   .stat .stat-icon{
-    width:26px;height:26px;
+    width:38px;height:38px;
     border-radius:50%;
-    margin:0 auto 6px;
+    margin:0 auto 12px;
     display:flex;align-items:center;justify-content:center;
-    font-size:13px;
+    font-size:17px;
     color:#fff;
   }
-  .stat .stat-num{font-size:16px;font-weight:700;}
-  .stat .stat-lbl{font-size:10.5px;color:var(--text-muted);}
+  .stat .stat-num{font-size:22px;font-weight:700;}
+  .stat .stat-lbl{font-size:12px;color:var(--text-muted);margin-top:2px;}
 
   .timer-box{
     background:var(--warn-bg);
     border:1px solid var(--warn-border);
     border-radius:10px;
-    padding:12px 16px;
+    padding:18px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:16px;
+    margin-bottom:22px;
   }
   .timer-box .left{
     display:flex;
-    gap:10px;
-    align-items:flex-start;
-    font-size:12px;
+    gap:14px;
+    align-items:center;
+    font-size:13px;
     color:var(--warn-text);
   }
-  .timer-box .left b{display:block;font-size:13px;}
+  .timer-box .left .ic{
+    width:40px;height:40px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:var(--orange);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+  }
+  .timer-box .left b{display:block;font-size:14px;margin-bottom:3px;}
   .timer-box .right{
     text-align:right;
+    padding-left:24px;
+    border-left:1px solid var(--warn-border);
   }
   .timer-box .right .tlabel{
-    font-size:10.5px;
+    font-size:11px;
     color:var(--warn-text);
     opacity:.8;
+    letter-spacing:.04em;
   }
   .timer-box .right .tval{
-    font-size:20px;
+    font-size:26px;
     font-weight:700;
     color:var(--orange);
     font-family:'Courier New', monospace;
@@ -567,15 +590,21 @@
   }
   .campaign-run-stats .crs{
     border-top:1px solid var(--border);
-    padding-top:10px;
+    padding-top:12px;
+    text-align:center;
+  }
+  .campaign-run-stats .crs-icon{
+    width:30px;height:30px;
+    border-radius:50%;
+    margin:0 auto 8px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+    color:#fff;
   }
   .campaign-run-stats .crs-lbl{
     font-size:11px;
     color:var(--text-muted);
     margin-bottom:4px;
-    display:flex;
-    align-items:center;
-    gap:5px;
   }
   .campaign-run-stats .crs-val{
     font-size:18px;
@@ -1136,7 +1165,7 @@ function showDeadlineTimer(){
   slot.innerHTML = `
     <div class="timer-box">
       <div class="left">
-        <span>🕘</span>
+        <span class="ic">🕘</span>
         <div><b>ATENÇÃO! PRAZO LIMITE PARA SOLICITAR CAMPANHA</b>Reservamos as mensagens do ecossistema. Não iniciada no prazo, a campanha será cancelada.</div>
       </div>
       <div class="right">
@@ -1234,19 +1263,23 @@ function renderCampaigns(){
           <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
           <div class="campaign-run-stats">
             <div class="crs">
-              <div class="crs-lbl">↗ Mensagens entregues nesta campanha</div>
+              <div class="crs-icon" style="background:var(--primary);">↗</div>
+              <div class="crs-lbl">Mensagens entregues nesta campanha</div>
               <div class="crs-val">${c.messagesSent} <small>de ${c.totalEstimated} estimadas</small></div>
             </div>
             <div class="crs">
-              <div class="crs-lbl">💬 Interações Geradas na campanha</div>
+              <div class="crs-icon" style="background:var(--green);">💬</div>
+              <div class="crs-lbl">Interações Geradas na campanha</div>
               <div class="crs-val">${c.interactions} <small>${c.interactions ? '' : 'sem interações ainda'}</small></div>
             </div>
             <div class="crs">
-              <div class="crs-lbl">⛁ Créditos consumidos nesta campanha</div>
+              <div class="crs-icon" style="background:var(--orange);">⛁</div>
+              <div class="crs-lbl">Créditos consumidos nesta campanha</div>
               <div class="crs-val">${c.creditsUsed} <small>de ${totalCreditsAvailable} disponíveis</small></div>
             </div>
             <div class="crs">
-              <div class="crs-lbl">📈 Taxa de performance de rendimento da campanha</div>
+              <div class="crs-icon" style="background:#6c5ce7;">📈</div>
+              <div class="crs-lbl">Taxa de performance de rendimento da campanha</div>
               <div class="crs-val">${perfText}</div>
             </div>
           </div>
