@@ -725,6 +725,153 @@
     gap:8px;
   }
 
+  /* Extrato de Créditos */
+  .extrato-stats-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 22px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:20px;
+  }
+  .extrato-tipo-main{ font-size:13px; font-weight:600; }
+  .extrato-tipo-main.tipo-compra{ color:var(--green); }
+  .extrato-tipo-main.tipo-campanha{ color:var(--primary); }
+  .extrato-tipo-sub{ font-size:11.5px; color:var(--text-muted); }
+  .extrato-data{ font-size:13px; color:var(--text); }
+  .extrato-hora{ font-size:11.5px; color:var(--text-muted); }
+  .badge-credito-pos, .badge-credito-neg{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-weight:700;
+    padding:5px 14px;
+    border-radius:14px;
+    font-size:12px;
+  }
+  .badge-credito-pos{ background:#D8FFE9; color:var(--green); }
+  .badge-credito-neg{ background:#FFE0E0; color:var(--red); }
+  .ver-detalhes-credito-btn{
+    background:var(--primary-dark);
+    color:#fff;
+    border:none;
+    padding:9px 18px;
+    border-radius:18px;
+    font-size:12.5px;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .apurando-wrap{ position:relative; display:inline-block; }
+  .apurando-btn{
+    background:var(--bg);
+    color:var(--text-muted);
+    border:1px solid var(--border);
+    padding:9px 16px;
+    border-radius:18px;
+    font-size:12px;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    cursor:default;
+  }
+  .apurando-tooltip{
+    display:none;
+    position:absolute;
+    bottom:120%;
+    right:0;
+    width:270px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 16px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.16);
+    text-align:left;
+    z-index:60;
+  }
+  .apurando-wrap:hover .apurando-tooltip{ display:block; }
+  .apurando-tooltip b{ display:block; font-size:13px; margin-bottom:6px; }
+  .apurando-tooltip p{ font-size:11.5px; color:var(--text-muted); line-height:1.5; margin:0; }
+
+  /* Extrato modal (Compra / Campanha) */
+  .extrato-modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(20,30,32,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+  }
+  .extrato-modal-overlay.show{ display:flex; }
+  .extrato-modal{
+    background:#fff;
+    border-radius:14px;
+    width:480px;
+    max-width:92vw;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+  }
+  .extrato-modal-header{
+    background:var(--primary-dark);
+    color:#fff;
+    padding:18px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .extrato-modal-header-left{ display:flex; gap:10px; align-items:flex-start; }
+  .extrato-modal-header-left i{ font-size:20px; margin-top:2px; }
+  .extrato-modal-header h3{ margin:0; font-size:16px; }
+  .extrato-modal-header .sub{ font-size:11.5px; opacity:.85; margin-top:2px; }
+  .extrato-modal-close{ background:none; border:none; color:#fff; font-size:18px; cursor:pointer; }
+  .extrato-modal-body{ padding:22px 24px; }
+  .extrato-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .extrato-row .label{ font-size:13px; font-weight:600; color:var(--text); }
+  .extrato-row .label small{ display:block; font-weight:400; color:var(--text-muted); font-size:11px; margin-top:2px; }
+  .extrato-row .value{ font-size:15px; font-weight:700; color:var(--text); }
+  .extrato-row .value.pos{ color:var(--green); }
+  .extrato-row .value.neg{ color:var(--red); }
+  .extrato-subrow{
+    display:flex;
+    justify-content:space-between;
+    padding:6px 0 6px 14px;
+    font-size:12.5px;
+    color:var(--text-muted);
+  }
+  .extrato-subrow .value{ font-weight:600; color:var(--red); }
+  .extrato-total-row{
+    display:flex;
+    justify-content:flex-end;
+    padding:8px 0;
+    border-top:1px dashed var(--border);
+    margin-top:2px;
+    margin-bottom:8px;
+    font-weight:700;
+    color:var(--red);
+    font-size:13px;
+  }
+  .extrato-note{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+    font-size:11.5px;
+    color:var(--warn-text);
+    margin-top:10px;
+  }
+
   /* Modal */
   .overlay{
     position:fixed;
@@ -1176,7 +1323,7 @@
     <button class="active" id="navDashboard">Dashboard</button>
     <button id="navHistorico">Histórico de Campanhas</button>
     <button id="navExportar">Exportar Leads</button>
-    <button>Extrato de Créditos</button>
+    <button id="navExtrato">Extrato de Créditos</button>
   </div>
   <div class="user">
     João da Silva
@@ -1529,6 +1676,95 @@
     <div class="extract-btn-wrap">
       <button class="extract-btn-green" id="exportExtractBtn"><i class="ph ph-file-xls"></i> Extrair Relação Excel</button>
     </div>
+  </div>
+</div>
+
+<!-- EXTRATO DE CRÉDITOS -->
+<div class="container" id="extratoView" style="display:none;">
+  <div class="section-title"><i class="ph ph-file-text"></i> Extrato de Créditos</div>
+  <div class="export-subtitle">Acompanhe toda a movimentação de créditos das suas campanhas</div>
+
+  <div class="extrato-stats-card">
+    <div class="hist-banner-stat">
+      <div class="hbs-icon"><i class="ph ph-archive"></i></div>
+      <div><div class="hbs-num">200</div><div class="hbs-lbl">Saldo Atual<br><span>Créditos Disponíveis</span></div></div>
+    </div>
+    <div class="hist-banner-stat">
+      <div class="hbs-icon"><i class="ph ph-share-network"></i></div>
+      <div><div class="hbs-num">1.247</div><div class="hbs-lbl">Total Consumido<br><span>Mensagem enviada x entregues</span></div></div>
+    </div>
+    <div class="hist-banner-stat">
+      <div class="hbs-icon"><i class="ph ph-coin"></i></div>
+      <div><div class="hbs-num">342</div><div class="hbs-lbl">Créditos Pendentes<br><span>Em Campanhas em Andamento</span></div></div>
+    </div>
+    <div class="hist-banner-stat">
+      <div class="hbs-icon"><i class="ph ph-arrow-u-down-left"></i></div>
+      <div><div class="hbs-num">48</div><div class="hbs-lbl">Total Devolvido<br><span>Créditos não Utilizados e Retornados</span></div></div>
+    </div>
+  </div>
+
+  <div class="export-card">
+    <div class="export-filters">
+      <div class="conv-field" style="flex:1;">
+        <label>Buscar pela campanha</label>
+        <div class="conv-input-icon">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Busque pela campanha">
+        </div>
+      </div>
+      <div class="conv-field conv-date">
+        <label>De</label>
+        <div class="conv-input-icon">
+          <input type="text" placeholder="dd/mm/aa">
+          <i class="ph ph-calendar-blank"></i>
+        </div>
+      </div>
+      <div class="conv-field conv-date">
+        <label>Até</label>
+        <div class="conv-input-icon">
+          <input type="text" placeholder="dd/mm/aa">
+          <i class="ph ph-calendar-blank"></i>
+        </div>
+      </div>
+      <button class="conv-search-btn">Buscar</button>
+      <div class="conv-pill-filter">
+        <span class="conv-pill-label">Filtrar por:</span>
+        <div class="conv-pills">
+          <button class="conv-pill active" id="pillProcessados">Processados</button>
+          <button class="conv-pill" id="pillNaoProcessados">Não Processados</button>
+        </div>
+      </div>
+    </div>
+
+    <table class="conv-table">
+      <thead><tr><th>Tipo</th><th>Data</th><th>Transação</th><th>Saldo Após</th><th>Ação</th></tr></thead>
+      <tbody id="extratoTableBody"></tbody>
+    </table>
+
+    <div class="conv-pagination">
+      <button class="pg-btn" disabled><i class="ph ph-caret-double-left"></i></button>
+      <button class="pg-btn" disabled><i class="ph ph-caret-left"></i></button>
+      <span class="pg-range" id="extratoPgRange">1-10 de 87</span>
+      <button class="pg-btn"><i class="ph ph-caret-right"></i></button>
+      <button class="pg-btn"><i class="ph ph-caret-double-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- EXTRATO DA COMPRA / CAMPANHA MODAL -->
+<div class="extrato-modal-overlay" id="extratoModalOverlay">
+  <div class="extrato-modal">
+    <div class="extrato-modal-header">
+      <div class="extrato-modal-header-left">
+        <i class="ph ph-file-text"></i>
+        <div>
+          <h3 id="extratoModalTitle">Extrato da Compra</h3>
+          <div class="sub" id="extratoModalSubtitle">Compra de Crédito - 01/04/2026 às 16h41min</div>
+        </div>
+      </div>
+      <button class="extrato-modal-close" id="extratoModalClose"><i class="ph ph-x"></i></button>
+    </div>
+    <div class="extrato-modal-body" id="extratoModalBody"></div>
   </div>
 </div>
 
@@ -2227,9 +2463,11 @@ function showView(view){
   document.getElementById('historicoView').style.display = view === 'historico' ? '' : 'none';
   document.getElementById('detalheView').style.display = view === 'detalhe' ? '' : 'none';
   document.getElementById('exportLeadsView').style.display = view === 'exportar' ? '' : 'none';
+  document.getElementById('extratoView').style.display = view === 'extrato' ? '' : 'none';
   document.getElementById('navDashboard').classList.toggle('active', view === 'dashboard');
   document.getElementById('navHistorico').classList.toggle('active', view === 'historico' || view === 'detalhe');
   document.getElementById('navExportar').classList.toggle('active', view === 'exportar');
+  document.getElementById('navExtrato').classList.toggle('active', view === 'extrato');
   window.scrollTo(0, 0);
 }
 
@@ -2241,6 +2479,10 @@ document.getElementById('navHistorico').addEventListener('click', () => {
 document.getElementById('navExportar').addEventListener('click', () => {
   showView('exportar');
   renderExportLeads();
+});
+document.getElementById('navExtrato').addEventListener('click', () => {
+  showView('extrato');
+  renderExtratoTable();
 });
 
 // ----- Histórico de Campanhas -----
@@ -2418,6 +2660,114 @@ document.getElementById('exportExtractBtn').addEventListener('click', () => {
   XLSX.utils.book_append_sheet(wb, ws, 'Leads');
   XLSX.writeFile(wb, 'leads_exportados.xlsx');
 });
+
+// ----- Extrato de Créditos -----
+const EXTRATO_DATA = [
+  { id:1, type:'compra',   data:'02/04/2026', hora:'16h41min', delta:500,  saldoApos:600 },
+  { id:2, type:'campanha', campanha:'Black Friday 2026', data:'02/04/2026', hora:'15h30min', delta:-250, saldoApos:291 },
+  { id:3, type:'campanha', campanha:'Natal 2026',         data:'01/04/2026', hora:'10h00min', delta:-300, saldoApos:413 },
+  { id:4, type:'campanha', campanha:'Verão 2027',         data:'01/04/2026', hora:'15h10min', delta:-150, saldoApos:511 },
+  { id:5, type:'compra',   data:'01/04/2026', hora:'12h06min', delta:300,  saldoApos:600 }
+];
+
+let extratoFilter = 'processados';
+
+function extratoRowHtml(row){
+  const tipoCell = row.type === 'compra'
+    ? `<div class="extrato-tipo-main tipo-compra">Compra de Crédito</div>`
+    : `<div class="extrato-tipo-main tipo-campanha">Campanha</div><div class="extrato-tipo-sub">${row.campanha}</div>`;
+  const transacaoCell = row.delta > 0
+    ? `<span class="badge-credito-pos">+${row.delta} Créditos <i class="ph ph-arrow-up"></i></span>`
+    : `<span class="badge-credito-neg">${row.delta} Créditos <i class="ph ph-arrow-down"></i></span>`;
+
+  let acaoCell;
+  if (extratoFilter === 'nao-processados') {
+    acaoCell = `
+      <div class="apurando-wrap">
+        <button class="apurando-btn"><i class="ph ph-info"></i> Apurando Consumo da sua Campanha</button>
+        <div class="apurando-tooltip">
+          <b>Apuração da Campanha</b>
+          <p>Sua campanha foi concluída. Estamos apurando o consumo final de créditos, o que pode levar até 72h. Durante esse período, o consumo de créditos ainda pode sofrer ajustes. Assim que o processamento for concluído, o extrato definitivo ficará disponível no filtro de "Processados". Você também poderá visualizar o retorno da campanha na seção "Histórico de Campanhas".</p>
+        </div>
+      </div>`;
+  } else {
+    acaoCell = `<button class="ver-detalhes-credito-btn" data-id="${row.id}">Ver Detalhes <i class="ph ph-arrow-right"></i></button>`;
+  }
+
+  return `<tr>
+    <td>${tipoCell}</td>
+    <td><div class="extrato-data">${row.data}</div><div class="extrato-hora">às ${row.hora}</div></td>
+    <td>${transacaoCell}</td>
+    <td>${row.saldoApos} Créditos</td>
+    <td>${acaoCell}</td>
+  </tr>`;
+}
+
+function renderExtratoTable(){
+  const tbody = document.getElementById('extratoTableBody');
+  const rows = extratoFilter === 'nao-processados'
+    ? EXTRATO_DATA.filter(r => r.type === 'campanha')
+    : EXTRATO_DATA;
+
+  tbody.innerHTML = rows.map(extratoRowHtml).join('');
+  document.getElementById('extratoPgRange').textContent = `1-${rows.length} de 87`;
+
+  if (extratoFilter !== 'nao-processados') {
+    tbody.querySelectorAll('.ver-detalhes-credito-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = EXTRATO_DATA.find(r => r.id === parseInt(btn.dataset.id, 10));
+        if (row.type === 'compra') openExtratoCompraModal(row);
+        else openExtratoCampanhaModal(row);
+      });
+    });
+  }
+}
+
+document.getElementById('pillProcessados').addEventListener('click', () => setExtratoFilter('processados'));
+document.getElementById('pillNaoProcessados').addEventListener('click', () => setExtratoFilter('nao-processados'));
+
+function setExtratoFilter(f){
+  extratoFilter = f;
+  document.getElementById('pillProcessados').classList.toggle('active', f === 'processados');
+  document.getElementById('pillNaoProcessados').classList.toggle('active', f === 'nao-processados');
+  renderExtratoTable();
+}
+
+const extratoModalOverlay = document.getElementById('extratoModalOverlay');
+document.getElementById('extratoModalClose').addEventListener('click', () => {
+  extratoModalOverlay.classList.remove('show');
+});
+
+function openExtratoCompraModal(row){
+  document.getElementById('extratoModalTitle').textContent = 'Extrato da Compra';
+  document.getElementById('extratoModalSubtitle').textContent = `Compra de Crédito - ${row.data} às ${row.hora}`;
+  document.getElementById('extratoModalBody').innerHTML = `
+    <div class="extrato-row"><div class="label">Saldo Antes da Compra</div><div class="value">700</div></div>
+    <div class="extrato-row"><div class="label">Pacote Adquirido</div></div>
+    <div class="extrato-subrow"><span>200 Créditos</span><span class="value" style="color:var(--green);">+200</span></div>
+    <div class="extrato-row"><div class="label">Pagamento Realizado</div><div class="value" style="color:var(--green);">R$ 199,90</div></div>
+    <div class="extrato-row" style="border-bottom:none;"><div class="label">Saldo Após a Compra</div><div class="value">900</div></div>
+    <div class="extrato-note"><i class="ph ph-info"></i> Caso identifique inconsistências no seu saldo após a compra entre em contato com o suporte.</div>
+  `;
+  extratoModalOverlay.classList.add('show');
+}
+
+function openExtratoCampanhaModal(row){
+  document.getElementById('extratoModalTitle').textContent = 'Extrato da Campanha';
+  document.getElementById('extratoModalSubtitle').textContent = `Campanha ${row.campanha} - ${row.data}`;
+  document.getElementById('extratoModalBody').innerHTML = `
+    <div class="extrato-row"><div class="label">Saldo Antes da Campanha</div><div class="value">700</div></div>
+    <div class="extrato-row"><div class="label">Créditos Reservados para a Campanha<small>Velocidade de disparo: Média (3 créditos por mensagem)</small></div><div class="value">600</div></div>
+    <div class="extrato-row"><div class="label">Créditos já Consumidos</div></div>
+    <div class="extrato-subrow"><span>200 Mensagens Enviadas</span><span class="value">-564</span></div>
+    <div class="extrato-subrow"><span>12 Mensagens Não Entregues <i class="ph ph-info"></i></span><span class="value">-1</span></div>
+    <div class="extrato-total-row">-565</div>
+    <div class="extrato-row"><div class="label">Créditos já Devolvidos <i class="ph ph-info"></i></div><div class="value pos">+35</div></div>
+    <div class="extrato-row" style="border-bottom:none;"><div class="label">Saldo Após a Campanha</div><div class="value">135</div></div>
+    <div class="extrato-note"><i class="ph ph-info"></i> Caso identifique inconsistências no seu saldo após a campanha ou nos valores do extrato, entre em contato com o suporte.</div>
+  `;
+  extratoModalOverlay.classList.add('show');
+}
 </script>
 </body>
 </html>
