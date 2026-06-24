@@ -483,6 +483,193 @@
   }
   .msg.out .msg-time i{ color:var(--primary); }
 
+  /* Histórico de Campanhas */
+  .hist-banner{
+    background:linear-gradient(135deg, var(--primary) 0%, #3CB4C9 100%);
+    border-radius:var(--radius);
+    padding:24px 26px;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .hist-banner-title{
+    font-size:18px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .hist-banner-desc{
+    font-size:13px;
+    opacity:.9;
+    margin:4px 0 18px;
+  }
+  .hist-banner-stats{
+    background:#fff;
+    border-radius:12px;
+    padding:18px 22px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .hist-banner-stat{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .hbs-icon{
+    width:38px;height:38px;
+    border-radius:50%;
+    background:var(--primary-light);
+    color:var(--primary-dark);
+    display:flex;align-items:center;justify-content:center;
+    font-size:17px;
+    flex-shrink:0;
+  }
+  .hbs-num{ font-size:22px; font-weight:700; color:var(--text); }
+  .hbs-lbl{ font-size:11.5px; color:var(--text); font-weight:600; }
+  .hbs-lbl span{ font-weight:400; color:var(--text-muted); font-size:11px; }
+
+  .hist-filters{
+    display:flex;
+    align-items:flex-end;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+  }
+  .hist-list{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .hist-list-head{
+    background:var(--primary-light);
+    color:var(--primary-dark);
+    font-size:13px;
+    font-weight:600;
+    padding:12px 20px;
+  }
+  .hist-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 20px;
+    border-bottom:1px solid var(--border);
+  }
+  .hist-row:last-child{ border-bottom:none; }
+  .hist-row-left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .hist-row-icon{
+    width:34px;height:34px;
+    border-radius:8px;
+    background:var(--primary-light);
+    color:var(--primary-dark);
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;
+    flex-shrink:0;
+  }
+  .hist-row-name{ font-size:13.5px; font-weight:600; }
+  .hist-row-dates{ font-size:11.5px; color:var(--text-muted); margin-top:2px; }
+  .ver-detalhes-btn{
+    background:#fff;
+    border:1px solid var(--primary);
+    color:var(--primary-dark);
+    font-size:12.5px;
+    font-weight:600;
+    padding:9px 18px;
+    border-radius:18px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .hist-list .conv-pagination{ padding:16px 0 18px; margin-top:0; }
+
+  /* Detalhe da Campanha */
+  .detalhe-back{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:var(--text-muted);
+    font-size:12.5px;
+    text-decoration:none;
+    margin-bottom:10px;
+  }
+  .detalhe-title{ font-size:22px; margin:0 0 4px; }
+  .detalhe-subtitle{ font-size:13px; color:var(--text-muted); margin-bottom:18px; }
+  .detalhe-card{
+    background:#E9F6F9;
+    border-radius:var(--radius);
+    padding:24px 26px;
+    margin-bottom:20px;
+  }
+  .detalhe-card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .detalhe-status{
+    color:var(--primary-dark);
+    font-weight:700;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .detalhe-pct{ font-size:26px; font-weight:700; color:var(--text); }
+  .detalhe-sub{ font-size:11.5px; color:var(--text-muted); margin:6px 0 10px; }
+  .detalhe-card .progress-track{ background:#C7E4E9; margin-bottom:22px; }
+  .detalhe-metrics-row{
+    background:#fff;
+    border-radius:12px;
+    padding:16px 18px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+  }
+  .dm{ display:flex; align-items:flex-start; gap:10px; }
+  .dm-icon{
+    width:34px;height:34px;
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px;
+    flex-shrink:0;
+  }
+  .dm-num{ font-size:18px; font-weight:700; color:var(--text); }
+  .dm-lbl{ font-size:11px; color:var(--text); font-weight:600; margin-top:2px; }
+  .dm-lbl span{ font-weight:400; color:var(--text-muted); }
+  .dm-lbl a{ color:var(--primary); font-size:11px; text-decoration:none; }
+  .dm-lbl i{ font-size:11px; color:var(--text-muted); }
+
+  .status-msgs-section{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .status-msgs-body{ padding:18px 20px; }
+  .badge-entregue{ background:#D8FFE9; color:var(--green); }
+  .badge-nao-entregue{ background:#FFE0E0; color:var(--red); }
+  .extract-btn-wrap{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:16px;
+  }
+  .extract-btn{
+    background:var(--primary-dark);
+    color:#fff;
+    border:none;
+    padding:11px 20px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
   /* Modal */
   .overlay{
     position:fixed;
@@ -931,8 +1118,8 @@
     <div>Villela<small>Leads IA</small></div>
   </div>
   <div class="nav">
-    <button class="active">Dashboard</button>
-    <button>Histórico de Campanhas</button>
+    <button class="active" id="navDashboard">Dashboard</button>
+    <button id="navHistorico">Histórico de Campanhas</button>
     <button>Exportar Leads</button>
     <button>Extrato de Créditos</button>
   </div>
@@ -942,7 +1129,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="dashboardView">
   <div class="section-title"><i class="ph ph-dots-three-outline"></i> Ecossistema e Nova Campanha</div>
   <div class="row">
     <div class="card credits-card">
@@ -1062,6 +1249,171 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HISTÓRICO DE CAMPANHAS -->
+<div class="container" id="historicoView" style="display:none;">
+  <div class="hist-banner">
+    <div class="hist-banner-title"><i class="ph ph-dots-three-outline"></i> Histórico de Campanhas</div>
+    <div class="hist-banner-desc">Acompanhe e analise campanhas anteriores</div>
+    <div class="hist-banner-stats">
+      <div class="hist-banner-stat">
+        <div class="hbs-icon"><i class="ph-fill ph-play"></i></div>
+        <div><div class="hbs-num">42</div><div class="hbs-lbl">Total de Campanhas<br><span>Campanhas Abertas e finalizadas</span></div></div>
+      </div>
+      <div class="hist-banner-stat">
+        <div class="hbs-icon"><i class="ph ph-chat-circle-text"></i></div>
+        <div><div class="hbs-num">4.500</div><div class="hbs-lbl">Total de Mensagens<br><span>Mensagens Entregues</span></div></div>
+      </div>
+      <div class="hist-banner-stat">
+        <div class="hbs-icon"><i class="ph ph-users-three"></i></div>
+        <div><div class="hbs-num">342</div><div class="hbs-lbl">Total de Leads<br><span>Gerados efetivamente</span></div></div>
+      </div>
+      <div class="hist-banner-stat">
+        <div class="hbs-icon"><i class="ph ph-trend-up"></i></div>
+        <div><div class="hbs-num">7,6%</div><div class="hbs-lbl">Taxa Média de Conversão<br><span>Entre Mensagens x leads gerados</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hist-filters">
+    <div class="conv-field" style="flex:1;">
+      <label>Buscar pela campanha</label>
+      <div class="conv-input-icon">
+        <i class="ph ph-magnifying-glass"></i>
+        <input type="text" placeholder="Busque pela campanha">
+      </div>
+    </div>
+    <div class="conv-field conv-date">
+      <label>De</label>
+      <div class="conv-input-icon">
+        <input type="text" placeholder="dd/mm/aa">
+        <i class="ph ph-calendar-blank"></i>
+      </div>
+    </div>
+    <div class="conv-field conv-date">
+      <label>Até</label>
+      <div class="conv-input-icon">
+        <input type="text" placeholder="dd/mm/aa">
+        <i class="ph ph-calendar-blank"></i>
+      </div>
+    </div>
+    <button class="conv-search-btn">Buscar</button>
+    <div class="conv-pill-filter">
+      <span class="conv-pill-label">Filtrar por:</span>
+      <div class="conv-pills">
+        <button class="conv-pill active" id="pillRecentes">Mais Recentes</button>
+        <button class="conv-pill" id="pillAntigas">Mais Antigas</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hist-list">
+    <div class="hist-list-head">Histórico das últimas campanhas finalizadas</div>
+    <div id="histListBody"></div>
+    <div class="conv-pagination">
+      <button class="pg-btn" disabled><i class="ph ph-caret-double-left"></i></button>
+      <button class="pg-btn" disabled><i class="ph ph-caret-left"></i></button>
+      <span class="pg-range">1-10 de 87</span>
+      <button class="pg-btn"><i class="ph ph-caret-right"></i></button>
+      <button class="pg-btn"><i class="ph ph-caret-double-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- DETALHE DA CAMPANHA -->
+<div class="container" id="detalheView" style="display:none;">
+  <a href="#" class="detalhe-back" id="detalheBackLink"><i class="ph ph-arrow-left"></i> Tela de Histórico de Campanhas</a>
+  <h2 class="detalhe-title" id="detalheTitle">Campanha Black Friday 2025</h2>
+  <div class="detalhe-subtitle">Veja os insights da campanha</div>
+
+  <div class="detalhe-card">
+    <div class="detalhe-card-top">
+      <div class="detalhe-status"><i class="ph ph-check-circle"></i> Campanha Finalizada</div>
+      <div class="detalhe-pct">100%</div>
+    </div>
+    <div class="detalhe-sub">Estimativa de envio de <span id="detalheTotalMsgs">200</span> mensagens</div>
+    <div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>
+
+    <div class="detalhe-metrics-row">
+      <div class="dm">
+        <div class="dm-icon" style="background:var(--primary-light);color:var(--primary-dark);"><i class="ph ph-paper-plane-tilt"></i></div>
+        <div><div class="dm-num" id="dmEnviadas">200</div><div class="dm-lbl">Mensagens Enviadas<br><span>Total de envios na campanha</span></div></div>
+      </div>
+      <div class="dm">
+        <div class="dm-icon" style="background:#FFE0E0;color:var(--red);"><i class="ph ph-chat-circle-text"></i></div>
+        <div><div class="dm-num" id="dmNaoEntregues">12</div><div class="dm-lbl">Mensagens Não Entregues<br><span>Entregas que faltaram <i class="ph ph-info"></i></span></div></div>
+      </div>
+      <div class="dm">
+        <div class="dm-icon" style="background:#D8FFE9;color:var(--green);"><i class="ph ph-chats"></i></div>
+        <div><div class="dm-num" id="dmInteracoes">24</div><div class="dm-lbl">Total de Interações<br><span>Retornos dos contatos</span></div></div>
+      </div>
+      <div class="dm">
+        <div class="dm-icon" style="background:var(--primary-light);color:var(--primary-dark);"><i class="ph ph-users-three"></i></div>
+        <div><div class="dm-num" id="dmLeads">03</div><div class="dm-lbl">Leads Gerados<br><span>Total de leads da campanha <i class="ph ph-info"></i></span></div></div>
+      </div>
+    </div>
+
+    <div class="detalhe-metrics-row" style="margin-top:14px;">
+      <div class="dm">
+        <div class="dm-icon" style="background:var(--bg);color:var(--text-muted);"><i class="ph ph-file-text"></i></div>
+        <div><div class="dm-num" style="font-size:14px;">Produto da Campanha</div><div class="dm-lbl" id="dmProduto">Campanha Tributária</div></div>
+      </div>
+      <div class="dm">
+        <div class="dm-icon" style="background:var(--bg);color:var(--text-muted);"><i class="ph ph-gauge"></i></div>
+        <div><div class="dm-num" style="font-size:14px;">Velocidade de Disparo <i class="ph ph-info"></i></div><div class="dm-lbl">Velocidade Média</div></div>
+      </div>
+      <div class="dm">
+        <div class="dm-icon" style="background:var(--bg);color:var(--text-muted);"><i class="ph ph-coins"></i></div>
+        <div><div class="dm-num" id="dmCreditos">600</div><div class="dm-lbl">Créditos Consumidos<br><a href="#">Ver Consumo da Campanha</a></div></div>
+      </div>
+      <div class="dm">
+        <div class="dm-icon" style="background:var(--bg);color:var(--text-muted);"><i class="ph ph-trend-up"></i></div>
+        <div><div class="dm-num" id="dmPerformance">94%</div><div class="dm-lbl">Performance Entrega<br><span>Mensagem enviada x entregues</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-msgs-section">
+    <div class="hist-list-head" style="border-radius:10px 10px 0 0;">Status de Mensagens da Campanha</div>
+    <div class="status-msgs-body">
+      <div class="conv-filters" style="margin-bottom:16px;">
+        <div class="conv-field" style="flex:1;">
+          <label>Buscar pelo número ou contato</label>
+          <div class="conv-input-icon">
+            <i class="ph ph-magnifying-glass"></i>
+            <input type="text" placeholder="Insira um número ou contato">
+          </div>
+        </div>
+        <button class="conv-search-btn">Buscar</button>
+        <div class="conv-pill-filter">
+          <span class="conv-pill-label">Filtrar por:</span>
+          <div class="conv-pills">
+            <button class="conv-pill active" id="pillTodos">Todos</button>
+            <button class="conv-pill" id="pillEntregues">Entregues</button>
+            <button class="conv-pill" id="pillNaoEntregues">Não Entregues</button>
+          </div>
+        </div>
+      </div>
+
+      <table class="conv-table">
+        <thead><tr><th>Número</th><th>Contato</th><th>Status</th></tr></thead>
+        <tbody id="statusMsgsBody"></tbody>
+      </table>
+
+      <div class="conv-pagination">
+        <button class="pg-btn" disabled><i class="ph ph-caret-double-left"></i></button>
+        <button class="pg-btn" disabled><i class="ph ph-caret-left"></i></button>
+        <span class="pg-range">1-10 de 21</span>
+        <button class="pg-btn"><i class="ph ph-caret-right"></i></button>
+        <button class="pg-btn"><i class="ph ph-caret-double-right"></i></button>
+      </div>
+
+      <div class="extract-btn-wrap" id="extractBtnWrap" style="display:none;">
+        <button class="extract-btn" id="extractBtn"><i class="ph ph-download-simple"></i> Extrair Relação de Mensagens Não Entregues</button>
       </div>
     </div>
   </div>
@@ -1194,6 +1546,7 @@
 
 <input type="file" id="fileInput" accept=".csv,.xlsx" style="display:none;">
 
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script>
 const SEGMENTOS_BY_PRODUTO = {
   "Tributário": ["Cobrança","Alerta","Boas-vindas"],
@@ -1754,6 +2107,123 @@ function setConvFilter(mode){
   resetPhoneMockup();
   renderConvTable();
 }
+
+// ----- Navegação entre telas -----
+function showView(view){
+  document.getElementById('dashboardView').style.display = view === 'dashboard' ? '' : 'none';
+  document.getElementById('historicoView').style.display = view === 'historico' ? '' : 'none';
+  document.getElementById('detalheView').style.display = view === 'detalhe' ? '' : 'none';
+  document.getElementById('navDashboard').classList.toggle('active', view === 'dashboard');
+  document.getElementById('navHistorico').classList.toggle('active', view === 'historico' || view === 'detalhe');
+  window.scrollTo(0, 0);
+}
+
+document.getElementById('navDashboard').addEventListener('click', () => showView('dashboard'));
+document.getElementById('navHistorico').addEventListener('click', () => {
+  showView('historico');
+  renderHistList();
+});
+
+// ----- Histórico de Campanhas -----
+const HISTORICO_CAMPANHAS = [
+  { name:'Campanha Black Friday 2025',  start:'01/04/2024 às 12:00', end:'01/04/2024 às 18:00' },
+  { name:'Campanha Verão 2026',         start:'15/06/2024 às 09:00', end:'15/06/2024 às 21:00' },
+  { name:'Campanha Natal 2025',         start:'10/12/2024 às 08:30', end:'10/12/2024 às 20:00' },
+  { name:'Campanha Cyber Monday 2025',  start:'27/11/2024 às 00:01', end:'27/11/2024 às 23:59' },
+  { name:'Campanha Primavera 2026',     start:'20/09/2024 às 10:00', end:'20/09/2024 às 22:00' }
+];
+
+let histSort = 'recentes';
+
+function renderHistList(){
+  const body = document.getElementById('histListBody');
+  const list = histSort === 'antigas' ? [...HISTORICO_CAMPANHAS].reverse() : HISTORICO_CAMPANHAS;
+  body.innerHTML = list.map(c => `
+    <div class="hist-row">
+      <div class="hist-row-left">
+        <div class="hist-row-icon"><i class="ph-fill ph-play"></i></div>
+        <div><div class="hist-row-name">${c.name}</div><div class="hist-row-dates">Iniciada em ${c.start} &nbsp;-&nbsp; Encerrada em ${c.end}</div></div>
+      </div>
+      <button class="ver-detalhes-btn">Ver Detalhes da Campanha</button>
+    </div>`).join('');
+  body.querySelectorAll('.ver-detalhes-btn').forEach((btn, i) => {
+    btn.addEventListener('click', () => openDetalhe(list[i]));
+  });
+}
+
+document.getElementById('pillRecentes').addEventListener('click', () => setHistSort('recentes'));
+document.getElementById('pillAntigas').addEventListener('click', () => setHistSort('antigas'));
+
+function setHistSort(s){
+  histSort = s;
+  document.getElementById('pillRecentes').classList.toggle('active', s === 'recentes');
+  document.getElementById('pillAntigas').classList.toggle('active', s === 'antigas');
+  renderHistList();
+}
+
+// ----- Detalhe da Campanha -----
+function openDetalhe(campaign){
+  document.getElementById('detalheTitle').textContent = campaign.name;
+  setStatusFilter('todos');
+  showView('detalhe');
+}
+
+document.getElementById('detalheBackLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  showView('historico');
+});
+
+const STATUS_MSGS_DATA = [
+  { numero:'+55 11 9301-0974',  contato:'Lucas Ferreira',         entregue:true },
+  { numero:'+55 11 99377-5292', contato:'Ana Carolina Mendes',    entregue:true },
+  { numero:'+55 11 97239-3093', contato:'Rafael Souza',           entregue:true },
+  { numero:'+55 11 94374-2980', contato:'Juliana Oliveira',       entregue:true },
+  { numero:'+55 11 91075-5762', contato:'Pedro Henrique Costa',   entregue:false },
+  { numero:'+55 11 99996-0550', contato:'Mariana Lima',           entregue:true },
+  { numero:'+55 11 98765-4321', contato:'Thiago Almeida',         entregue:true },
+  { numero:'+55 11 91234-5678', contato:'Beatriz Santos',         entregue:true },
+  { numero:'+55 11 95678-1234', contato:'Gabriel Rodrigues',      entregue:true },
+  { numero:'+55 11 93456-7890', contato:'Camila Pereira',         entregue:false }
+];
+
+let statusFilter = 'todos';
+
+function statusRowHtml(r, entregue){
+  return `<tr><td>${r.numero}</td><td>${r.contato}</td><td><span class="badge ${entregue ? 'badge-entregue' : 'badge-nao-entregue'}">${entregue ? 'Mensagem Entregue' : 'Mensagem não entregue'}</span></td></tr>`;
+}
+
+function renderStatusMsgs(){
+  const tbody = document.getElementById('statusMsgsBody');
+  if (statusFilter === 'entregues') {
+    tbody.innerHTML = STATUS_MSGS_DATA.map(r => statusRowHtml(r, true)).join('');
+  } else if (statusFilter === 'nao-entregues') {
+    tbody.innerHTML = STATUS_MSGS_DATA.map(r => statusRowHtml(r, false)).join('');
+  } else {
+    tbody.innerHTML = STATUS_MSGS_DATA.map(r => statusRowHtml(r, r.entregue)).join('');
+  }
+  document.getElementById('extractBtnWrap').style.display = statusFilter === 'nao-entregues' ? 'flex' : 'none';
+}
+
+document.getElementById('pillTodos').addEventListener('click', () => setStatusFilter('todos'));
+document.getElementById('pillEntregues').addEventListener('click', () => setStatusFilter('entregues'));
+document.getElementById('pillNaoEntregues').addEventListener('click', () => setStatusFilter('nao-entregues'));
+
+function setStatusFilter(f){
+  statusFilter = f;
+  document.getElementById('pillTodos').classList.toggle('active', f === 'todos');
+  document.getElementById('pillEntregues').classList.toggle('active', f === 'entregues');
+  document.getElementById('pillNaoEntregues').classList.toggle('active', f === 'nao-entregues');
+  renderStatusMsgs();
+}
+
+document.getElementById('extractBtn').addEventListener('click', () => {
+  const naoEntregues = STATUS_MSGS_DATA.filter(r => !r.entregue);
+  const data = naoEntregues.map(r => ({ Número: r.numero, Contato: r.contato, Status: 'Mensagem não entregue' }));
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Não Entregues');
+  XLSX.writeFile(wb, 'mensagens_nao_entregues.xlsx');
+});
 </script>
 </body>
 </html>
