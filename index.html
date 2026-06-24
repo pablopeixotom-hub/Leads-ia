@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Villela Leads IA - Dashboard</title>
+<style>
+  :root{
+    --primary:#0f5c66;
+    --primary-dark:#0a4750;
+    --primary-light:#e8f3f4;
+    --border:#dde5e7;
+    --text:#1f2d2f;
+    --text-muted:#6b7c7e;
+    --bg:#f4f7f8;
+    --warn-bg:#fff3e0;
+    --warn-border:#ffd9a0;
+    --warn-text:#a86400;
+    --green:#1f9d55;
+    --orange:#e08c1f;
+    --red:#d64545;
+    --radius:12px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:Segoe UI, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    margin:20px;
+    padding:14px 22px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    font-size:18px;
+    color:var(--primary-dark);
+  }
+  .brand .logo{
+    width:34px;height:34px;border-radius:8px;
+    background:var(--primary);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+  }
+  .brand small{
+    display:block;
+    font-weight:400;
+    font-size:11px;
+    color:var(--text-muted);
+  }
+  .nav{
+    display:flex;
+    gap:10px;
+  }
+  .nav button{
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--text);
+    padding:9px 16px;
+    border-radius:20px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .nav button.active{
+    background:var(--primary-dark);
+    color:#fff;
+    border-color:var(--primary-dark);
+  }
+  .user{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+  }
+  .avatar{
+    width:32px;height:32px;border-radius:50%;
+    background:var(--primary-light);
+    color:var(--primary-dark);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:13px;
+  }
+  .container{
+    margin:0 20px 40px;
+  }
+  .section-title{
+    font-size:16px;
+    font-weight:700;
+    margin:18px 0 10px;
+  }
+  .row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 20px;
+  }
+  .credits-card{
+    display:flex;
+    gap:24px;
+  }
+  .credit-block{flex:1;}
+  .credit-block .label{
+    font-size:11px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:6px;
+  }
+  .credit-block .value{
+    font-size:30px;
+    font-weight:700;
+    color:var(--primary-dark);
+  }
+  .refresh{
+    font-size:11px;
+    color:var(--primary);
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .btn-outline{
+    margin-top:8px;
+    border:1px solid var(--primary);
+    color:var(--primary);
+    background:#fff;
+    padding:7px 14px;
+    border-radius:8px;
+    font-size:12px;
+    cursor:pointer;
+  }
+  .update-time{
+    font-size:11px;
+    color:var(--text-muted);
+    margin-top:8px;
+  }
+  .new-campaign-card{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .new-campaign-card .title{
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:4px;
+  }
+  .new-campaign-card .desc{
+    font-size:12px;
+    color:var(--text-muted);
+    margin-bottom:16px;
+  }
+  .btn-primary{
+    background:var(--primary-dark);
+    color:#fff;
+    border:none;
+    padding:13px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    width:100%;
+  }
+  .btn-primary:disabled{
+    background:#a9c4c8;
+    cursor:not-allowed;
+  }
+  .metrics-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:16px;
+    margin-top:14px;
+  }
+  .metric-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .metric-icon{
+    width:38px;height:38px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+    flex-shrink:0;
+  }
+  .metric-card .num{
+    font-size:24px;
+    font-weight:700;
+  }
+  .metric-card .lbl{
+    font-size:12px;
+    color:var(--text-muted);
+  }
+  .campaigns-list{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin-top:14px;
+  }
+  .campaigns-list .empty{
+    text-align:center;
+    color:var(--text-muted);
+    font-size:13px;
+    padding:20px 0;
+  }
+  .conversas-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin-top:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .conversas-card .desc{
+    font-size:12px;
+    color:var(--text-muted);
+  }
+  .conversas-card a{
+    color:var(--primary);
+    font-size:13px;
+    text-decoration:none;
+  }
+
+  /* Modal */
+  .overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(20,30,32,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+  }
+  .overlay.show{display:flex;}
+  .modal{
+    background:#fff;
+    border-radius:14px;
+    width:560px;
+    max-width:92vw;
+    padding:26px 28px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+  }
+  .modal h2{
+    margin:0 0 4px;
+    font-size:19px;
+  }
+  .modal .breadcrumb{
+    font-size:12px;
+    color:var(--text-muted);
+    margin-bottom:16px;
+  }
+  .field-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:6px;
+  }
+  .field{
+    margin-bottom:14px;
+  }
+  .field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .field label .req{color:var(--red);}
+  select, .fake-select, .upload-zone{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-size:13px;
+    background:#fff;
+    color:var(--text);
+  }
+  select:disabled{
+    background:#f5f7f8;
+    color:#aab5b6;
+  }
+  .multiselect{
+    position:relative;
+  }
+  .multiselect .fake-select{
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .multiselect .fake-select.disabled{
+    cursor:not-allowed;
+    background:#f5f7f8;
+    color:#aab5b6;
+  }
+  .multiselect .panel{
+    position:absolute;
+    top:calc(100% + 4px);
+    left:0;right:0;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:8px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.12);
+    z-index:20;
+    display:none;
+    max-height:220px;
+    overflow-y:auto;
+  }
+  .multiselect .panel.show{display:block;}
+  .opt{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 14px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .opt:hover{background:var(--primary-light);}
+  .opt.selected{background:var(--primary-light);}
+  .opt input{pointer-events:none;}
+
+  .info-box{
+    background:var(--warn-bg);
+    border:1px solid var(--warn-border);
+    color:var(--warn-text);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:12.5px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .info-box .ic{font-size:16px;}
+  .info-box code{
+    background:rgba(255,255,255,0.6);
+    padding:1px 5px;
+    border-radius:4px;
+  }
+  .upload-zone{
+    border:1.5px dashed var(--border);
+    text-align:center;
+    padding:18px;
+    font-size:12.5px;
+    color:var(--text-muted);
+    cursor:pointer;
+    margin-bottom:16px;
+  }
+  .upload-zone.has-file{
+    border-color:var(--primary);
+    color:var(--primary-dark);
+    background:var(--primary-light);
+  }
+  .selected-summary{
+    display:flex;
+    gap:8px;
+    font-size:12px;
+    color:var(--text-muted);
+    margin-bottom:14px;
+  }
+  .actions{
+    display:flex;
+    gap:12px;
+    margin-top:4px;
+  }
+  .btn-cancel{
+    flex:1;
+    background:#fff;
+    border:1px solid var(--border);
+    padding:11px;
+    border-radius:8px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .btn-confirm{
+    flex:1;
+    background:var(--primary-dark);
+    color:#fff;
+    border:none;
+    padding:11px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .btn-confirm:disabled{
+    background:#bcd3d6;
+    cursor:not-allowed;
+  }
+
+  .skeleton{
+    height:64px;
+    border-radius:8px;
+    background:linear-gradient(90deg, #eef2f3 25%, #e2e8e9 37%, #eef2f3 63%);
+    background-size:400% 100%;
+    animation:shimmer 1.4s infinite;
+    margin-bottom:16px;
+  }
+  @keyframes shimmer{
+    0%{background-position:100% 0;}
+    100%{background-position:0 0;}
+  }
+  .progress-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:12.5px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .progress-track{
+    height:8px;
+    background:var(--border);
+    border-radius:6px;
+    overflow:hidden;
+    margin-bottom:16px;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:var(--primary);
+    transition:width 0.15s linear;
+  }
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .stat{
+    text-align:center;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 4px;
+  }
+  .stat .stat-icon{
+    width:26px;height:26px;
+    border-radius:50%;
+    margin:0 auto 6px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;
+    color:#fff;
+  }
+  .stat .stat-num{font-size:16px;font-weight:700;}
+  .stat .stat-lbl{font-size:10.5px;color:var(--text-muted);}
+
+  .timer-box{
+    background:var(--warn-bg);
+    border:1px solid var(--warn-border);
+    border-radius:10px;
+    padding:12px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+  }
+  .timer-box .left{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    font-size:12px;
+    color:var(--warn-text);
+  }
+  .timer-box .left b{display:block;font-size:13px;}
+  .timer-box .right{
+    text-align:right;
+  }
+  .timer-box .right .tlabel{
+    font-size:10.5px;
+    color:var(--warn-text);
+    opacity:.8;
+  }
+  .timer-box .right .tval{
+    font-size:20px;
+    font-weight:700;
+    color:var(--orange);
+    font-family:'Courier New', monospace;
+  }
+
+  /* Success modal */
+  .success-modal{
+    text-align:center;
+    padding:10px 6px;
+  }
+  .success-icon{
+    width:52px;height:52px;
+    border-radius:50%;
+    background:#e6f7ec;
+    color:var(--green);
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;
+    margin:0 auto 16px;
+  }
+  .success-modal h2{
+    font-size:18px;
+    margin-bottom:8px;
+  }
+  .success-modal p{
+    font-size:13px;
+    color:var(--text-muted);
+    margin-bottom:22px;
+    line-height:1.5;
+  }
+  .success-modal .btn-confirm{
+    width:100%;
+  }
+
+  /* Running campaign card */
+  .campaign-run{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .campaign-run + .campaign-run{
+    margin-top:12px;
+  }
+  .campaign-run-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .campaign-run-head .meta{
+    font-size:11.5px;
+    color:var(--text-muted);
+    font-weight:400;
+    display:flex;
+    gap:14px;
+  }
+  .campaign-run-progress-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .campaign-run-sub{
+    font-size:11.5px;
+    color:var(--text-muted);
+    margin-bottom:6px;
+  }
+  .campaign-run .progress-track{margin-bottom:14px;}
+  .campaign-run-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  .campaign-run-stats .crs{
+    border-top:1px solid var(--border);
+    padding-top:10px;
+  }
+  .campaign-run-stats .crs-lbl{
+    font-size:11px;
+    color:var(--text-muted);
+    margin-bottom:4px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .campaign-run-stats .crs-val{
+    font-size:18px;
+    font-weight:700;
+  }
+  .campaign-run-stats .crs-val small{
+    font-size:11px;
+    font-weight:400;
+    color:var(--text-muted);
+  }
+
+  /* Cancel confirmation modal */
+  .confirm-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(20,30,32,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+  }
+  .confirm-overlay.show{display:flex;}
+  .confirm-modal{
+    background:#fff;
+    border-radius:14px;
+    width:420px;
+    max-width:90vw;
+    padding:28px 30px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    text-align:center;
+  }
+  .confirm-icon{
+    width:48px;height:48px;
+    border-radius:50%;
+    background:var(--warn-bg);
+    color:var(--orange);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;
+    margin:0 auto 16px;
+  }
+  .confirm-modal h2{
+    font-size:17px;
+    margin:0 0 8px;
+  }
+  .confirm-modal p{
+    font-size:13px;
+    color:var(--text-muted);
+    line-height:1.5;
+    margin:0 0 22px;
+  }
+  .confirm-actions{
+    display:flex;
+    gap:12px;
+  }
+  .btn-voltar{
+    flex:1;
+    background:#fff;
+    border:1px solid var(--border);
+    padding:11px;
+    border-radius:8px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .btn-confirm-cancel{
+    flex:1;
+    background:var(--primary-dark);
+    color:#fff;
+    border:none;
+    padding:11px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="logo">VL</div>
+    <div>Villela<small>Leads IA</small></div>
+  </div>
+  <div class="nav">
+    <button class="active">Dashboard</button>
+    <button>Histórico de Campanhas</button>
+    <button>Exportar Leads</button>
+    <button>Extrato de Créditos</button>
+  </div>
+  <div class="user">
+    João da Silva
+    <div class="avatar">JS</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-title">⊙ Ecossistema e Nova Campanha</div>
+  <div class="row">
+    <div class="card credits-card">
+      <div class="credit-block">
+        <div class="label">Saldo de Créditos <a class="refresh" onclick="return false;">↻ Atualizar</a></div>
+        <div class="value">200</div>
+        <button class="btn-outline">Comprar Créditos</button>
+      </div>
+      <div class="credit-block">
+        <div class="label">Limite de Mensagens do Ecossistema <a class="refresh" onclick="return false;">↻ Atualizar</a></div>
+        <div class="value">500</div>
+        <div class="update-time">Última atualização às 14:35</div>
+      </div>
+    </div>
+    <div class="card new-campaign-card">
+      <div>
+        <div class="title">↳ Crie sua próxima campanha</div>
+        <div class="desc">Inicie a configuração da sua campanha e após insira a listagem de contatos</div>
+      </div>
+      <button class="btn-primary" id="openModalBtn">▷ Criar Nova Campanha</button>
+    </div>
+  </div>
+
+  <div class="section-title">⊙ Métricas e Campanhas em Andamento</div>
+  <div class="metrics-row">
+    <div class="metric-card">
+      <div class="metric-icon" style="background:#e8f3f4;color:var(--primary-dark);">▷</div>
+      <div><div class="num" id="metricActiveCampaigns">0</div><div class="lbl" id="metricActiveCampaignsLbl">campanha ativa</div></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:#e6f7ec;color:var(--green);">👤</div>
+      <div><div class="num" id="metricLeads">0</div><div class="lbl">total até o momento</div></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon" style="background:#fdf1de;color:var(--orange);">⛁</div>
+      <div><div class="num" id="metricCreditsUsed">0</div><div class="lbl">de 200 disponíveis</div></div>
+    </div>
+  </div>
+
+  <div class="campaigns-list">
+    <div style="font-weight:600;font-size:13px;margin-bottom:4px;">☰ Campanhas em Andamento</div>
+    <div class="empty" id="campaignsEmpty">Não há campanhas em andamento, para iniciar uma nova, clique em "Criar Nova Campanha".</div>
+    <div id="campaignsRunning"></div>
+  </div>
+
+  <div class="conversas-card">
+    <div>
+      <div style="font-weight:600;font-size:13px;">⌗ Conversas</div>
+      <div class="desc">Veja as conversas e interações das suas campanhas</div>
+    </div>
+    <a href="#">Visualizar Conversas das Campanhas ⌄</a>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+
+    <!-- STEP 1: CONFIG -->
+    <div id="step-config">
+      <h2>Configurar Campanha</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label>Produto da Campanha<span class="req">*</span></label>
+          <select id="produto">
+            <option value="">Selecione um produto</option>
+            <option value="Tributário">Tributário</option>
+            <option value="Financeiro">Financeiro</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Segmento<span class="req">*</span></label>
+          <select id="segmento" disabled>
+            <option value="">Selecione um segmento</option>
+            <option value="Cobrança">Cobrança</option>
+            <option value="Boas-vindas">Boas-vindas</option>
+            <option value="Alerta">Alerta</option>
+            <option value="Retenção">Retenção</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Variação<span class="req">*</span></label>
+        <div class="multiselect" id="variacaoWrap">
+          <div class="fake-select disabled" id="variacaoFake">
+            <span id="variacaoFakeText">Selecione uma variação</span>
+            <span>⌄</span>
+          </div>
+          <div class="panel" id="variacaoPanel"></div>
+        </div>
+      </div>
+
+      <div class="info-box" id="infoBox" style="display:none;">
+        <span class="ic">🕘</span>
+        <div>
+          <b>Dados necessários da listagem:</b>
+          A variação escolhida exige as variáveis de <code>{{nome}}</code> e <code>{{contato}}</code> na listagem. Caso falte uma destas variáveis o contato será invalidado.
+        </div>
+      </div>
+
+      <div class="upload-zone" id="uploadZone" style="display:none;">
+        📎 Clique para selecionar o arquivo da listagem de contatos (.csv, .xlsx)
+      </div>
+
+      <div class="actions">
+        <button class="btn-cancel" id="cancelBtn1">Cancelar Solicitação</button>
+        <button class="btn-confirm" id="processBtn" disabled>Processar Listagem de Contatos</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: PROCESSING -->
+    <div id="step-processing" style="display:none;">
+      <h2>Configurar Campanha</h2>
+      <div class="breadcrumb" id="breadcrumbText">Financeiro · Cobrança · Pagamento Pix</div>
+
+      <div id="timerBoxSlot"></div>
+
+      <div class="skeleton" id="skeletonBox"></div>
+
+      <div id="progressSlot" style="display:none;">
+        <div class="progress-label"><span>Processamento da Listagem</span><span id="progressPct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-icon" style="background:var(--primary);">👥</div>
+            <div class="stat-num" id="statTotal">0</div>
+            <div class="stat-lbl">Total de contatos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon" style="background:var(--green);">✓</div>
+            <div class="stat-num" id="statValid">0</div>
+            <div class="stat-lbl">Contatos válidos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon" style="background:var(--orange);">⧉</div>
+            <div class="stat-num" id="statDup">0</div>
+            <div class="stat-lbl">Duplicados removidos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon" style="background:var(--red);">⚠</div>
+            <div class="stat-num" id="statInvalid">0</div>
+            <div class="stat-lbl">Inválidos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-cancel" id="cancelBtn2">Cancelar Solicitação</button>
+        <button class="btn-confirm" id="startBtn" disabled>Iniciar Campanha</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: SUCCESS -->
+    <div id="step-success" class="success-modal" style="display:none;">
+      <div class="success-icon">✓</div>
+      <h2>Campanha criada com sucesso!</h2>
+      <p>Sua campanha já está em andamento e você poderá acompanhá-la diretamente da sua Dashboard</p>
+      <button class="btn-confirm" id="goToDashboardBtn">Ir para Dashboard</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- CANCEL CONFIRMATION MODAL -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-modal">
+    <div class="confirm-icon">!</div>
+    <h2>Cancelar criação de campanha</h2>
+    <p>Ao cancelar a solicitação você perderá todo o progresso feito. Deseja cancelar a solicitação?</p>
+    <div class="confirm-actions">
+      <button class="btn-voltar" id="confirmVoltarBtn">Voltar</button>
+      <button class="btn-confirm-cancel" id="confirmCancelBtn">Sim, cancelar</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="fileInput" accept=".csv,.xlsx" style="display:none;">
+
+<script>
+const SEGMENTOS_BY_PRODUTO = {
+  "Tributário": ["Cobrança","Alerta","Boas-vindas"],
+  "Financeiro": ["Cobrança","Retenção","Alerta"],
+  "Comercial": ["Boas-vindas","Retenção"],
+  "Marketing": ["Boas-vindas","Retenção","Alerta"]
+};
+
+const VARIACOES_MAP = {
+  "Cobrança": [
+    "Primeiro Contato com o Cliente",
+    "Pagamento Pix",
+    "Pagamento Cartão de Crédito",
+    "Pagamento de Empréstimo"
+  ],
+  "Boas-vindas": [
+    "Primeiro Contato com o Cliente",
+    "Mensagem de Boas-vindas"
+  ],
+  "Alerta": [
+    "Primeiro Contato com o Cliente",
+    "Alerta de Vencimento",
+    "Alerta de Pendência"
+  ],
+  "Retenção": [
+    "Primeiro Contato com o Cliente",
+    "Oferta de Renegociação"
+  ]
+};
+
+const VARIAVEIS_REQUIRED = {
+  "Primeiro Contato com o Cliente": ["nome","contato"],
+  "Pagamento Pix": ["nome","contato"],
+  "Pagamento Cartão de Crédito": ["nome","contato","valor"],
+  "Pagamento de Empréstimo": ["nome","contato","valor","parcela"],
+  "Mensagem de Boas-vindas": ["nome","contato"],
+  "Alerta de Vencimento": ["nome","contato","data_vencimento"],
+  "Alerta de Pendência": ["nome","contato"],
+  "Oferta de Renegociação": ["nome","contato","valor"]
+};
+
+const produtoEl = document.getElementById('produto');
+const segmentoEl = document.getElementById('segmento');
+const variacaoFake = document.getElementById('variacaoFake');
+const variacaoFakeText = document.getElementById('variacaoFakeText');
+const variacaoPanel = document.getElementById('variacaoPanel');
+const infoBox = document.getElementById('infoBox');
+const uploadZone = document.getElementById('uploadZone');
+const processBtn = document.getElementById('processBtn');
+const fileInput = document.getElementById('fileInput');
+
+let selectedVariacoes = new Set();
+let uploadedFile = null;
+
+produtoEl.addEventListener('change', () => {
+  const produto = produtoEl.value;
+  segmentoEl.innerHTML = '<option value="">Selecione um segmento</option>';
+  segmentoEl.disabled = !produto;
+  resetVariacao();
+  if (produto) {
+    SEGMENTOS_BY_PRODUTO[produto].forEach(seg => {
+      const opt = document.createElement('option');
+      opt.value = seg; opt.textContent = seg;
+      segmentoEl.appendChild(opt);
+    });
+  }
+});
+
+segmentoEl.addEventListener('change', () => {
+  resetVariacao();
+  const seg = segmentoEl.value;
+  if (seg) {
+    variacaoFake.classList.remove('disabled');
+    buildVariacaoPanel(seg);
+  } else {
+    variacaoFake.classList.add('disabled');
+  }
+});
+
+function resetVariacao(){
+  selectedVariacoes.clear();
+  variacaoFakeText.textContent = 'Selecione uma variação';
+  variacaoFake.classList.add('disabled');
+  variacaoPanel.innerHTML = '';
+  variacaoPanel.classList.remove('show');
+  infoBox.style.display = 'none';
+  uploadZone.style.display = 'none';
+  uploadedFile = null;
+  uploadZone.classList.remove('has-file');
+  uploadZone.textContent = '📎 Clique para selecionar o arquivo da listagem de contatos (.csv, .xlsx)';
+  updateProcessBtn();
+}
+
+function buildVariacaoPanel(seg){
+  variacaoPanel.innerHTML = '';
+  (VARIACOES_MAP[seg] || []).forEach(v => {
+    const row = document.createElement('div');
+    row.className = 'opt';
+    row.innerHTML = `<input type="checkbox" data-val="${v}"> <span>${v}</span>`;
+    row.addEventListener('click', () => toggleVariacao(v, row));
+    variacaoPanel.appendChild(row);
+  });
+}
+
+function toggleVariacao(v, row){
+  if (selectedVariacoes.has(v)) {
+    selectedVariacoes.delete(v);
+    row.classList.remove('selected');
+    row.querySelector('input').checked = false;
+  } else {
+    selectedVariacoes.clear();
+    variacaoPanel.querySelectorAll('.opt').forEach(o => { o.classList.remove('selected'); o.querySelector('input').checked = false; });
+    selectedVariacoes.add(v);
+    row.classList.add('selected');
+    row.querySelector('input').checked = true;
+  }
+  variacaoFakeText.textContent = selectedVariacoes.size ? Array.from(selectedVariacoes).join(', ') : 'Selecione uma variação';
+  variacaoPanel.classList.remove('show');
+  refreshInfoBox();
+  updateProcessBtn();
+}
+
+variacaoFake.addEventListener('click', () => {
+  if (variacaoFake.classList.contains('disabled')) return;
+  variacaoPanel.classList.toggle('show');
+});
+document.addEventListener('click', (e) => {
+  if (!document.getElementById('variacaoWrap').contains(e.target)) {
+    variacaoPanel.classList.remove('show');
+  }
+});
+
+function refreshInfoBox(){
+  if (!selectedVariacoes.size) {
+    infoBox.style.display = 'none';
+    uploadZone.style.display = 'none';
+    return;
+  }
+  const vars = new Set();
+  selectedVariacoes.forEach(v => (VARIAVEIS_REQUIRED[v] || []).forEach(x => vars.add(x)));
+  const list = Array.from(vars).map(v => `<code>{{${v}}}</code>`).join(', ');
+  infoBox.innerHTML = `<span class="ic">🕘</span><div><b>Dados necessários da listagem:</b> A variação escolhida exige as variáveis de ${list} na listagem. Caso falte uma destas variáveis o contato será invalidado.</div>`;
+  infoBox.style.display = 'flex';
+  uploadZone.style.display = 'block';
+  autoLoadMockFile();
+}
+
+function autoLoadMockFile(){
+  uploadedFile = { name: 'listagem_contatos.csv' };
+  uploadZone.classList.add('has-file');
+  uploadZone.textContent = `✓ ${uploadedFile.name} (clique para trocar o arquivo)`;
+  updateProcessBtn();
+}
+
+uploadZone.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length) {
+    uploadedFile = fileInput.files[0];
+    uploadZone.classList.add('has-file');
+    uploadZone.textContent = `✓ ${uploadedFile.name}`;
+  }
+  updateProcessBtn();
+});
+
+function updateProcessBtn(){
+  const ok = produtoEl.value && segmentoEl.value && selectedVariacoes.size && uploadedFile;
+  processBtn.disabled = !ok;
+}
+
+// Open / close modal
+const overlay = document.getElementById('overlay');
+document.getElementById('openModalBtn').addEventListener('click', () => {
+  overlay.classList.add('show');
+  resetModal();
+});
+document.getElementById('cancelBtn1').addEventListener('click', openConfirmCancel);
+document.getElementById('cancelBtn2').addEventListener('click', openConfirmCancel);
+
+const confirmOverlay = document.getElementById('confirmOverlay');
+
+function openConfirmCancel(){
+  confirmOverlay.classList.add('show');
+}
+
+document.getElementById('confirmVoltarBtn').addEventListener('click', () => {
+  confirmOverlay.classList.remove('show');
+});
+
+document.getElementById('confirmCancelBtn').addEventListener('click', () => {
+  confirmOverlay.classList.remove('show');
+  pendingCampaign = null;
+  closeModal();
+});
+
+function closeModal(){
+  overlay.classList.remove('show');
+  if (countdownInterval) clearInterval(countdownInterval);
+  if (progressInterval) clearInterval(progressInterval);
+}
+
+function resetModal(){
+  document.getElementById('step-config').style.display = 'block';
+  document.getElementById('step-processing').style.display = 'none';
+  document.getElementById('step-success').style.display = 'none';
+  produtoEl.value = '';
+  segmentoEl.innerHTML = '<option value="">Selecione um segmento</option>';
+  segmentoEl.disabled = true;
+  resetVariacao();
+  fileInput.value = '';
+}
+
+// Step 2: processing
+let progressInterval = null;
+let countdownInterval = null;
+
+let pendingCampaign = null;
+
+processBtn.addEventListener('click', () => {
+  document.getElementById('step-config').style.display = 'none';
+  document.getElementById('step-processing').style.display = 'block';
+  document.getElementById('breadcrumbText').textContent =
+    `${produtoEl.value} · ${segmentoEl.value} · ${Array.from(selectedVariacoes).join(', ')}`;
+
+  pendingCampaign = {
+    produto: produtoEl.value,
+    segmento: segmentoEl.value,
+    variacao: Array.from(selectedVariacoes).join(', ')
+  };
+
+  document.getElementById('skeletonBox').style.display = 'block';
+  document.getElementById('progressSlot').style.display = 'none';
+  document.getElementById('timerBoxSlot').innerHTML = '';
+  document.getElementById('startBtn').disabled = true;
+
+  const totalContacts = Math.floor(250 + Math.random() * 150);
+  let invalid = Math.max(1, Math.round(totalContacts * 0.01));
+  let dup = Math.max(1, Math.round(totalContacts * 0.005));
+  let valid = totalContacts - invalid - dup;
+  pendingCampaign.totalContacts = totalContacts;
+  pendingCampaign.validContacts = valid;
+
+  setTimeout(() => {
+    document.getElementById('skeletonBox').style.display = 'none';
+    document.getElementById('progressSlot').style.display = 'block';
+    document.getElementById('statTotal').textContent = totalContacts;
+    runProgress(totalContacts, valid, dup, invalid);
+  }, 1200);
+});
+
+function runProgress(total, valid, dup, invalid){
+  let pct = 0;
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressPct').textContent = '0%';
+  document.getElementById('statValid').textContent = 0;
+  document.getElementById('statDup').textContent = 0;
+  document.getElementById('statInvalid').textContent = 0;
+
+  progressInterval = setInterval(() => {
+    pct += 2;
+    if (pct > 100) pct = 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('statValid').textContent = Math.round(valid * (pct/100));
+    document.getElementById('statDup').textContent = Math.round(dup * (pct/100));
+    document.getElementById('statInvalid').textContent = Math.round(invalid * (pct/100));
+
+    if (pct >= 100) {
+      clearInterval(progressInterval);
+      document.getElementById('statValid').textContent = valid;
+      document.getElementById('statDup').textContent = dup;
+      document.getElementById('statInvalid').textContent = invalid;
+      showDeadlineTimer();
+      document.getElementById('startBtn').disabled = false;
+    }
+  }, 60);
+}
+
+function showDeadlineTimer(){
+  let remaining = 10 * 60; // 10 minutes
+  const slot = document.getElementById('timerBoxSlot');
+  slot.innerHTML = `
+    <div class="timer-box">
+      <div class="left">
+        <span>🕘</span>
+        <div><b>ATENÇÃO! PRAZO LIMITE PARA SOLICITAR CAMPANHA</b>Reservamos as mensagens do ecossistema. Não iniciada no prazo, a campanha será cancelada.</div>
+      </div>
+      <div class="right">
+        <div class="tlabel">TEMPO RESTANTE</div>
+        <div class="tval" id="countdownVal">10:00</div>
+      </div>
+    </div>`;
+
+  countdownInterval = setInterval(() => {
+    remaining--;
+    const m = Math.floor(remaining / 60).toString().padStart(2,'0');
+    const s = (remaining % 60).toString().padStart(2,'0');
+    const el = document.getElementById('countdownVal');
+    if (el) el.textContent = `${m}:${s}`;
+    if (remaining <= 0) {
+      clearInterval(countdownInterval);
+      if (el) el.textContent = '00:00';
+      document.getElementById('startBtn').disabled = true;
+      document.getElementById('startBtn').textContent = 'Prazo Expirado';
+    }
+  }, 1000);
+}
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  if (countdownInterval) clearInterval(countdownInterval);
+  document.getElementById('step-processing').style.display = 'none';
+  document.getElementById('step-success').style.display = 'block';
+});
+
+document.getElementById('goToDashboardBtn').addEventListener('click', () => {
+  overlay.classList.remove('show');
+  document.getElementById('step-success').style.display = 'none';
+  if (pendingCampaign) {
+    createRunningCampaign(pendingCampaign);
+    pendingCampaign = null;
+  }
+});
+
+// ----- Running campaigns on dashboard -----
+let runningCampaigns = [];
+let totalCreditsAvailable = 200;
+
+function createRunningCampaign(cfg){
+  const now = new Date();
+  const startStr = formatDateTime(now);
+  const eta = new Date(now.getTime() + 30 * 60000);
+  const etaStr = formatDateTime(eta);
+  const seq = (runningCampaigns.length + 1).toString().padStart(2,'0');
+  const dateTag = now.toLocaleDateString('pt-BR').replace(/\//g,'.');
+
+  const campaign = {
+    id: 'camp-' + Date.now(),
+    name: `Campanha_${cfg.produto}_${dateTag}_${seq}`,
+    startStr, etaStr,
+    totalEstimated: cfg.totalContacts || 0,
+    messagesSent: Math.max(1, Math.round((cfg.totalContacts || 10) * 0.03)),
+    interactions: 0,
+    creditsUsed: 0,
+    performance: null
+  };
+  runningCampaigns.push(campaign);
+  renderCampaigns();
+  startCampaignTicker(campaign.id);
+}
+
+function formatDateTime(d){
+  const dd = d.toLocaleDateString('pt-BR');
+  const hh = d.getHours().toString().padStart(2,'0');
+  const mm = d.getMinutes().toString().padStart(2,'0');
+  return `${dd} às ${hh}:${mm}`;
+}
+
+function renderCampaigns(){
+  const empty = document.getElementById('campaignsEmpty');
+  const wrap = document.getElementById('campaignsRunning');
+  if (!runningCampaigns.length) {
+    empty.style.display = 'block';
+    wrap.innerHTML = '';
+  } else {
+    empty.style.display = 'none';
+    wrap.innerHTML = runningCampaigns.map(c => {
+      const pct = Math.min(100, Math.round((c.messagesSent / c.totalEstimated) * 100));
+      const perfText = c.performance === null ? '—% aguardando dados' : `${c.performance}%`;
+      return `
+        <div class="campaign-run">
+          <div class="campaign-run-head">
+            <span>${c.name}</span>
+            <span class="meta">
+              <span>🕘 Início em ${c.startStr}</span>
+              <span>📅 Previsão de encerramento em ${c.etaStr}</span>
+            </span>
+          </div>
+          <div class="campaign-run-progress-label"><span>Progresso da campanha</span><span>${pct}%</span></div>
+          <div class="campaign-run-sub">Estimativa de envio de ${c.totalEstimated} mensagens</div>
+          <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
+          <div class="campaign-run-stats">
+            <div class="crs">
+              <div class="crs-lbl">↗ Mensagens entregues nesta campanha</div>
+              <div class="crs-val">${c.messagesSent} <small>de ${c.totalEstimated} estimadas</small></div>
+            </div>
+            <div class="crs">
+              <div class="crs-lbl">💬 Interações Geradas na campanha</div>
+              <div class="crs-val">${c.interactions} <small>${c.interactions ? '' : 'sem interações ainda'}</small></div>
+            </div>
+            <div class="crs">
+              <div class="crs-lbl">⛁ Créditos consumidos nesta campanha</div>
+              <div class="crs-val">${c.creditsUsed} <small>de ${totalCreditsAvailable} disponíveis</small></div>
+            </div>
+            <div class="crs">
+              <div class="crs-lbl">📈 Taxa de performance de rendimento da campanha</div>
+              <div class="crs-val">${perfText}</div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+  updateMetrics();
+}
+
+function updateMetrics(){
+  document.getElementById('metricActiveCampaigns').textContent = runningCampaigns.length;
+  document.getElementById('metricActiveCampaignsLbl').textContent = runningCampaigns.length === 1 ? 'campanha ativa' : 'campanhas ativas';
+  const leads = runningCampaigns.reduce((s,c) => s + c.interactions, 0);
+  document.getElementById('metricLeads').textContent = leads;
+  const credits = runningCampaigns.reduce((s,c) => s + c.creditsUsed, 0);
+  document.getElementById('metricCreditsUsed').textContent = credits;
+}
+
+function startCampaignTicker(id){
+  const interval = setInterval(() => {
+    const c = runningCampaigns.find(x => x.id === id);
+    if (!c) { clearInterval(interval); return; }
+    if (c.messagesSent < c.totalEstimated) {
+      c.messagesSent += Math.max(1, Math.round(c.totalEstimated * 0.01));
+      if (c.messagesSent > c.totalEstimated) c.messagesSent = c.totalEstimated;
+    }
+    if (c.messagesSent > c.totalEstimated * 0.1) {
+      c.interactions = Math.round(c.messagesSent * 0.18);
+    }
+    c.creditsUsed = Math.round(c.messagesSent * 0.06);
+    if (c.messagesSent > c.totalEstimated * 0.2) {
+      c.performance = Math.min(98, 60 + Math.round((c.messagesSent / c.totalEstimated) * 35));
+    }
+    renderCampaigns();
+    if (c.messagesSent >= c.totalEstimated) clearInterval(interval);
+  }, 2500);
+}
+</script>
+</body>
+</html>
