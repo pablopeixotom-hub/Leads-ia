@@ -4,23 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Villela Leads IA - Dashboard</title>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
 <style>
   :root{
-    --primary:#0f5c66;
-    --primary-dark:#0a4750;
-    --primary-light:#e8f3f4;
-    --border:#dde5e7;
-    --text:#1f2d2f;
-    --text-muted:#6b7c7e;
-    --bg:#f4f7f8;
-    --warn-bg:#fff3e0;
-    --warn-border:#ffd9a0;
-    --warn-text:#a86400;
-    --green:#1f9d55;
-    --orange:#e08c1f;
-    --red:#d64545;
+    --primary:#10677F;
+    --primary-dark:#044A5D;
+    --primary-light:#D9EDF2;
+    --border:#E5E7EB;
+    --text:#1E1E1E;
+    --text-muted:#727272;
+    --bg:#F7F9FA;
+    --warn-bg:#FFF1DB;
+    --warn-border:#FFC66A;
+    --warn-text:#A86800;
+    --green:#2D8654;
+    --orange:#D18100;
+    --red:#C92B2B;
     --radius:12px;
   }
+  .ph, .ph-fill, .ph-bold{ line-height:1; vertical-align:middle; }
   *{box-sizing:border-box;}
   body{
     margin:0;
@@ -198,6 +202,7 @@
     width:38px;height:38px;border-radius:10px;
     display:flex;align-items:center;justify-content:center;
     font-size:18px;
+    color:#fff;
     flex-shrink:0;
   }
   .metric-card .num{
@@ -701,57 +706,57 @@
 </div>
 
 <div class="container">
-  <div class="section-title">⊙ Ecossistema e Nova Campanha</div>
+  <div class="section-title"><i class="ph ph-dots-three-outline"></i> Ecossistema e Nova Campanha</div>
   <div class="row">
     <div class="card credits-card">
       <div class="credit-block">
-        <div class="label">Saldo de Créditos <a class="refresh" onclick="return false;">↻ Atualizar</a></div>
+        <div class="label">Saldo de Créditos <a class="refresh" onclick="return false;"><i class="ph ph-arrows-clockwise"></i> Atualizar</a></div>
         <div class="value">200</div>
         <button class="btn-outline">Comprar Créditos</button>
       </div>
       <div class="credit-block">
-        <div class="label">Limite de Mensagens do Ecossistema <a class="refresh" onclick="return false;">↻ Atualizar</a></div>
+        <div class="label">Limite de Mensagens do Ecossistema <a class="refresh" onclick="return false;"><i class="ph ph-arrows-clockwise"></i> Atualizar</a></div>
         <div class="value">500</div>
         <div class="update-time">Última atualização às 14:35</div>
       </div>
     </div>
     <div class="card new-campaign-card">
       <div>
-        <div class="title">↳ Crie sua próxima campanha</div>
+        <div class="title"><i class="ph ph-arrow-bend-down-right"></i> Crie sua próxima campanha</div>
         <div class="desc">Inicie a configuração da sua campanha e após insira a listagem de contatos</div>
       </div>
-      <button class="btn-primary" id="openModalBtn">▷ Criar Nova Campanha</button>
+      <button class="btn-primary" id="openModalBtn"><i class="ph-fill ph-play"></i> Criar Nova Campanha</button>
     </div>
   </div>
 
-  <div class="section-title">⊙ Métricas e Campanhas em Andamento</div>
+  <div class="section-title"><i class="ph ph-dots-three-outline"></i> Métricas e Campanhas em Andamento</div>
   <div class="metrics-row">
     <div class="metric-card">
-      <div class="metric-icon" style="background:#e8f3f4;color:var(--primary-dark);">▷</div>
+      <div class="metric-icon" style="background:var(--primary);"><i class="ph-fill ph-play"></i></div>
       <div><div class="num" id="metricActiveCampaigns">0</div><div class="lbl" id="metricActiveCampaignsLbl">campanha ativa</div></div>
     </div>
     <div class="metric-card">
-      <div class="metric-icon" style="background:#e6f7ec;color:var(--green);">👤</div>
+      <div class="metric-icon" style="background:var(--green);"><i class="ph ph-users-three"></i></div>
       <div><div class="num" id="metricLeads">0</div><div class="lbl">total até o momento</div></div>
     </div>
     <div class="metric-card">
-      <div class="metric-icon" style="background:#fdf1de;color:var(--orange);">⛁</div>
+      <div class="metric-icon" style="background:var(--orange);"><i class="ph ph-coins"></i></div>
       <div><div class="num" id="metricCreditsUsed">0</div><div class="lbl">de 200 disponíveis</div></div>
     </div>
   </div>
 
   <div class="campaigns-list">
-    <div style="font-weight:600;font-size:13px;margin-bottom:4px;">☰ Campanhas em Andamento</div>
+    <div style="font-weight:600;font-size:13px;margin-bottom:4px;"><i class="ph ph-list"></i> Campanhas em Andamento</div>
     <div class="empty" id="campaignsEmpty">Não há campanhas em andamento, para iniciar uma nova, clique em "Criar Nova Campanha".</div>
     <div id="campaignsRunning"></div>
   </div>
 
   <div class="conversas-card">
     <div>
-      <div style="font-weight:600;font-size:13px;">⌗ Conversas</div>
+      <div style="font-weight:600;font-size:13px;"><i class="ph ph-chat-circle-text"></i> Conversas</div>
       <div class="desc">Veja as conversas e interações das suas campanhas</div>
     </div>
-    <a href="#">Visualizar Conversas das Campanhas ⌄</a>
+    <a href="#">Visualizar Conversas das Campanhas <i class="ph ph-caret-down"></i></a>
   </div>
 </div>
 
@@ -790,14 +795,14 @@
         <div class="multiselect" id="variacaoWrap">
           <div class="fake-select disabled" id="variacaoFake">
             <span id="variacaoFakeText">Selecione uma variação</span>
-            <span>⌄</span>
+            <i class="ph ph-caret-down"></i>
           </div>
           <div class="panel" id="variacaoPanel"></div>
         </div>
       </div>
 
       <div class="info-box" id="infoBox" style="display:none;">
-        <span class="ic">🕘</span>
+        <span class="ic"><i class="ph-fill ph-clock"></i></span>
         <div>
           <b>Dados necessários da listagem:</b>
           A variação escolhida exige as variáveis de <code>{{nome}}</code> e <code>{{contato}}</code> na listagem. Caso falte uma destas variáveis o contato será invalidado.
@@ -805,7 +810,7 @@
       </div>
 
       <div class="upload-zone" id="uploadZone" style="display:none;">
-        📎 Clique para selecionar o arquivo da listagem de contatos (.csv, .xlsx)
+        <i class="ph ph-paperclip"></i> Clique para selecionar o arquivo da listagem de contatos (.csv, .xlsx)
       </div>
 
       <div class="actions">
@@ -828,22 +833,22 @@
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
         <div class="stats-grid">
           <div class="stat">
-            <div class="stat-icon" style="background:var(--primary);">👥</div>
+            <div class="stat-icon" style="background:var(--primary);"><i class="ph ph-users-three"></i></div>
             <div class="stat-num" id="statTotal">0</div>
             <div class="stat-lbl">Total de contatos</div>
           </div>
           <div class="stat">
-            <div class="stat-icon" style="background:var(--green);">✓</div>
+            <div class="stat-icon" style="background:var(--green);"><i class="ph-bold ph-check"></i></div>
             <div class="stat-num" id="statValid">0</div>
             <div class="stat-lbl">Contatos válidos</div>
           </div>
           <div class="stat">
-            <div class="stat-icon" style="background:var(--orange);">⧉</div>
+            <div class="stat-icon" style="background:var(--orange);"><i class="ph ph-copy"></i></div>
             <div class="stat-num" id="statDup">0</div>
             <div class="stat-lbl">Duplicados removidos</div>
           </div>
           <div class="stat">
-            <div class="stat-icon" style="background:var(--red);">⚠</div>
+            <div class="stat-icon" style="background:var(--red);"><i class="ph-fill ph-warning"></i></div>
             <div class="stat-num" id="statInvalid">0</div>
             <div class="stat-lbl">Inválidos</div>
           </div>
@@ -858,7 +863,7 @@
 
     <!-- STEP 3: SUCCESS -->
     <div id="step-success" class="success-modal" style="display:none;">
-      <div class="success-icon">✓</div>
+      <div class="success-icon"><i class="ph-bold ph-check"></i></div>
       <h2>Campanha criada com sucesso!</h2>
       <p>Sua campanha já está em andamento e você poderá acompanhá-la diretamente da sua Dashboard</p>
       <button class="btn-confirm" id="goToDashboardBtn">Ir para Dashboard</button>
@@ -870,7 +875,7 @@
 <!-- CANCEL CONFIRMATION MODAL -->
 <div class="confirm-overlay" id="confirmOverlay">
   <div class="confirm-modal">
-    <div class="confirm-icon">!</div>
+    <div class="confirm-icon"><i class="ph-fill ph-warning"></i></div>
     <h2>Cancelar criação de campanha</h2>
     <p>Ao cancelar a solicitação você perderá todo o progresso feito. Deseja cancelar a solicitação?</p>
     <div class="confirm-actions">
@@ -971,7 +976,7 @@ function resetVariacao(){
   uploadZone.style.display = 'none';
   uploadedFile = null;
   uploadZone.classList.remove('has-file');
-  uploadZone.textContent = '📎 Clique para selecionar o arquivo da listagem de contatos (.csv, .xlsx)';
+  uploadZone.innerHTML = '<i class="ph ph-paperclip"></i> Clique para selecionar o arquivo da listagem de contatos (.csv, .xlsx)';
   updateProcessBtn();
 }
 
@@ -1023,7 +1028,7 @@ function refreshInfoBox(){
   const vars = new Set();
   selectedVariacoes.forEach(v => (VARIAVEIS_REQUIRED[v] || []).forEach(x => vars.add(x)));
   const list = Array.from(vars).map(v => `<code>{{${v}}}</code>`).join(', ');
-  infoBox.innerHTML = `<span class="ic">🕘</span><div><b>Dados necessários da listagem:</b> A variação escolhida exige as variáveis de ${list} na listagem. Caso falte uma destas variáveis o contato será invalidado.</div>`;
+  infoBox.innerHTML = `<span class="ic"><i class="ph-fill ph-clock"></i></span><div><b>Dados necessários da listagem:</b> A variação escolhida exige as variáveis de ${list} na listagem. Caso falte uma destas variáveis o contato será invalidado.</div>`;
   infoBox.style.display = 'flex';
   uploadZone.style.display = 'block';
   autoLoadMockFile();
@@ -1032,7 +1037,7 @@ function refreshInfoBox(){
 function autoLoadMockFile(){
   uploadedFile = { name: 'listagem_contatos.csv' };
   uploadZone.classList.add('has-file');
-  uploadZone.textContent = `✓ ${uploadedFile.name} (clique para trocar o arquivo)`;
+  uploadZone.innerHTML = `<i class="ph-fill ph-check-circle"></i> ${uploadedFile.name} (clique para trocar o arquivo)`;
   updateProcessBtn();
 }
 
@@ -1041,7 +1046,7 @@ fileInput.addEventListener('change', () => {
   if (fileInput.files.length) {
     uploadedFile = fileInput.files[0];
     uploadZone.classList.add('has-file');
-    uploadZone.textContent = `✓ ${uploadedFile.name}`;
+    uploadZone.innerHTML = `<i class="ph-fill ph-check-circle"></i> ${uploadedFile.name}`;
   }
   updateProcessBtn();
 });
@@ -1165,7 +1170,7 @@ function showDeadlineTimer(){
   slot.innerHTML = `
     <div class="timer-box">
       <div class="left">
-        <span class="ic">🕘</span>
+        <span class="ic"><i class="ph-fill ph-clock"></i></span>
         <div><b>ATENÇÃO! PRAZO LIMITE PARA SOLICITAR CAMPANHA</b>Reservamos as mensagens do ecossistema. Não iniciada no prazo, a campanha será cancelada.</div>
       </div>
       <div class="right">
@@ -1254,8 +1259,8 @@ function renderCampaigns(){
           <div class="campaign-run-head">
             <span>${c.name}</span>
             <span class="meta">
-              <span>🕘 Início em ${c.startStr}</span>
-              <span>📅 Previsão de encerramento em ${c.etaStr}</span>
+              <span><i class="ph ph-clock"></i> Início em ${c.startStr}</span>
+              <span><i class="ph ph-calendar-blank"></i> Previsão de encerramento em ${c.etaStr}</span>
             </span>
           </div>
           <div class="campaign-run-progress-label"><span>Progresso da campanha</span><span>${pct}%</span></div>
@@ -1263,22 +1268,22 @@ function renderCampaigns(){
           <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
           <div class="campaign-run-stats">
             <div class="crs">
-              <div class="crs-icon" style="background:var(--primary);">↗</div>
+              <div class="crs-icon" style="background:var(--primary);"><i class="ph ph-paper-plane-tilt"></i></div>
               <div class="crs-lbl">Mensagens entregues nesta campanha</div>
               <div class="crs-val">${c.messagesSent} <small>de ${c.totalEstimated} estimadas</small></div>
             </div>
             <div class="crs">
-              <div class="crs-icon" style="background:var(--green);">💬</div>
+              <div class="crs-icon" style="background:var(--green);"><i class="ph ph-chat-circle-dots"></i></div>
               <div class="crs-lbl">Interações Geradas na campanha</div>
               <div class="crs-val">${c.interactions} <small>${c.interactions ? '' : 'sem interações ainda'}</small></div>
             </div>
             <div class="crs">
-              <div class="crs-icon" style="background:var(--orange);">⛁</div>
+              <div class="crs-icon" style="background:var(--orange);"><i class="ph ph-coins"></i></div>
               <div class="crs-lbl">Créditos consumidos nesta campanha</div>
               <div class="crs-val">${c.creditsUsed} <small>de ${totalCreditsAvailable} disponíveis</small></div>
             </div>
             <div class="crs">
-              <div class="crs-icon" style="background:#6c5ce7;">📈</div>
+              <div class="crs-icon" style="background:#37A5C3;"><i class="ph ph-trend-up"></i></div>
               <div class="crs-lbl">Taxa de performance de rendimento da campanha</div>
               <div class="crs-val">${perfText}</div>
             </div>
